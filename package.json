@@ -1,6 +1,6 @@
 {
   "name": "nti-lib-content-processing",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Process NTI content (controlled HTML)",
   "main": "lib/index.js",
   "files": [
