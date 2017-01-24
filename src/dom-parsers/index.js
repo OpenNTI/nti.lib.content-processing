@@ -25,5 +25,7 @@ export default {
 
 	'object[type*=embeded\\2e widget]': parseDomObject,
 
+	'object[type*=embededtopic]':parseDomObject,
+
 	'[itemprop*=nti-data-markup],[itemprop~=nti-slide-video]': parseFramedElement
 };
