@@ -13,7 +13,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://repos.nextthought.com/git/nti.lib.content-processing"
+    "url": "https://github.com/NextThought/nti.lib.content-processing.git"
   },
   "keywords": [
     "ios",
