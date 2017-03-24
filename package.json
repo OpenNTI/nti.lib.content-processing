@@ -25,11 +25,11 @@
   "author": "nextthought",
   "license": "UNLICENSED",
   "dependencies": {
-    "node-uuid": "^1.4.3",
     "nti-lib-dom": "^1.0.0",
     "nti-lib-interfaces": "^1.0.0",
     "nti-util-logger": "^1.0.0",
-    "nti-web-client": "^1.0.0"
+    "nti-web-client": "^1.0.0",
+    "uuid": "^3.0.1"
   },
   "devDependencies": {
     "babel-cli": "^6.1.0",

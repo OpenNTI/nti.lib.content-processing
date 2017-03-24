@@ -1,6 +1,6 @@
 import {replaceNode, parent} from 'nti-lib-dom';
 
-import uuid from 'node-uuid';
+import uuid from 'uuid';
 
 import DEFAULT_STRATEGIES from './dom-parsers';
 
@@ -155,7 +155,7 @@ export function parseWidgets (strategies, doc, elementFactory) {
 				let result = strategies[selector](el) || {element: el};
 
 				if (!id) {
-					el.setAttribute('id', (id = uuid.v4()));
+					el.setAttribute('id', (id = uuid()));
 				}
 
 				replaceNode(el, makeMarker(id));
