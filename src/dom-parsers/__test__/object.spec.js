@@ -1,4 +1,5 @@
 import parseDomObject from '../object';
+
 import {makeDOM} from './tools';
 
 describe('DOM Parsers: DOM to Object Parser', () => {
@@ -42,7 +43,7 @@ describe('DOM Parsers: DOM to Object Parser', () => {
 		const json = parseDomObject(obj);
 		expect(json).toEqual({
 			src,
-			class: 'avatar', 
+			class: 'avatar',
 			style: 'opacity: 0'
 		});
 

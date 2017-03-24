@@ -42,7 +42,14 @@ describe('DOM Parsers: Parse Video Elements', () => {
 
 		expect(json instanceof Video).toBeTruthy();
 
-		expect(JSON.parse(JSON.stringify(json))).toEqual({
+		const raw = JSON.parse(JSON.stringify(json));
+
+		raw.sources.forEach(s => {
+			delete s['_eventsCount'];
+			delete s['domain'];
+		});
+
+		expect(raw).toEqual({
 			isVideo: true,
 			NO_TRANSCRIPT: 'No Transcript',
 			NO_TRANSCRIPT_LANG: 'No Transcript for the requested language.',

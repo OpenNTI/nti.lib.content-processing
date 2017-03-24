@@ -1,4 +1,5 @@
 import Logger from 'nti-util-logger';
+
 import parseDomObject from './object';
 
 const logger = Logger.get('content:utils:dom-parsers:image');

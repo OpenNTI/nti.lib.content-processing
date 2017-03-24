@@ -1,4 +1,5 @@
 import parseImage, {getImagesFromDom} from '../image';
+
 import {makeDOM} from './tools';
 
 describe('DOM Parsers: Parse Image Elements', () => {

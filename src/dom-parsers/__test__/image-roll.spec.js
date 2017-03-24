@@ -1,4 +1,5 @@
 import parseImageRoll from '../image-roll';
+
 import {makeDOM} from './tools';
 
 describe('DOM Parsers: Parse Image Roll Elements', () => {
