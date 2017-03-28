@@ -14,7 +14,7 @@ node_modules: package.json
 check:
 	@eslint --ext .js,.jsx ./src
 
-test: node_modules check
+test: node_modules clean check
 	@jest
 
 clean:
