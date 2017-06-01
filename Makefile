@@ -6,9 +6,8 @@ REPORTS = reports
 all: node_modules lib
 
 node_modules: package.json
-#	@rm -rf node_modules
-#	@npm install
-	@npm update
+	@rm -r $@
+	@npm install
 	@touch $@
 
 check:
@@ -22,4 +21,4 @@ clean:
 	@rm -rf $(REPORTS)
 
 lib: clean
-	@NODE_ENV=rollup rollup -c
+	@NODE_ENV=rollup rollup -clean
