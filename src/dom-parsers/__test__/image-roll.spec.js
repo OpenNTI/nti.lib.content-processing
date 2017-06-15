@@ -1,10 +1,11 @@
+/* eslint-env jest */
 import parseImageRoll from '../image-roll';
 
 import {makeDOM} from './tools';
 
-describe('DOM Parsers: Parse Image Roll Elements', () => {
+describe ('DOM Parsers: Parse Image Roll Elements', () => {
 
-	it ('parseImageRoll should return a valid object', () => {
+	test ('parseImageRoll should return a valid object', () => {
 		const roll = makeDOM(`
 			<object data="tag:nextthought.com,2011-10:LitWorld-NTIIC-LitClub_Overview.ntiimagecollection.1"
 				data-ntiid="tag:nextthought.com,2011-10:LitWorld-NTIIC-LitClub_Overview.ntiimagecollection.1"

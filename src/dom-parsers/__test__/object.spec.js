@@ -1,10 +1,11 @@
+/* eslint-env jest */
 import parseDomObject from '../object';
 
 import {makeDOM} from './tools';
 
-describe('DOM Parsers: DOM to Object Parser', () => {
+describe ('DOM Parsers: DOM to Object Parser', () => {
 
-	it ('Should interpret a DOM <object> into a JSON object', () => {
+	test ('Should interpret a DOM <object> into a JSON object', () => {
 		const id = 'fancy-thing';
 		const ntiid = 'tag:nextthought.com:test';
 		const type = 'application/vnd.next....';
@@ -36,7 +37,7 @@ describe('DOM Parsers: DOM to Object Parser', () => {
 	});
 
 
-	it ('Should work on any node', () => {
+	test ('Should work on any node', () => {
 		const src = 'generic.png';
 		const obj = makeDOM(`<img src="${src}" class="avatar" style="opacity: 0">`);
 

@@ -1,10 +1,11 @@
+/* eslint-env jest */
 import parseImage, {getImagesFromDom} from '../image';
 
 import {makeDOM} from './tools';
 
-describe('DOM Parsers: Parse Image Elements', () => {
+describe ('DOM Parsers: Parse Image Elements', () => {
 
-	it ('parseImage should return a valid object', () => {
+	test ('parseImage should return a valid object', () => {
 		const img = makeDOM(`
 			<img crossorigin="anonymous"
 				data-nti-image-full="resources/full.jpg"
@@ -35,7 +36,7 @@ describe('DOM Parsers: Parse Image Elements', () => {
 		});
 	});
 
-	it ('parseImage should understand any image', () => {
+	test ('parseImage should understand any image', () => {
 		const img = makeDOM(`
 			<img src="resources/full.jpg"/>
 		`);
@@ -58,7 +59,7 @@ describe('DOM Parsers: Parse Image Elements', () => {
 
 	describe ('getImagesFromDom', () => {
 
-		it ('should find images', () => {
+		test ('should find images', () => {
 			const imgs = makeDOM(`
 				<span>
 					<img crossorigin="anonymous"

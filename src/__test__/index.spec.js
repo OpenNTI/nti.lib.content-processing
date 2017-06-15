@@ -1,3 +1,4 @@
+/* eslint-env jest */
 import {
 	getContent,
 	parseHTML,
@@ -75,11 +76,11 @@ const SAMPLE_CONTENT = `
 `;
 
 
-describe('Content Processing', () => {
+describe ('Content Processing', () => {
 
-	describe('Helpers', () => {
+	describe ('Helpers', () => {
 
-		it ('getContent strips xml pragmas & junk', () => {
+		test ('getContent strips xml pragmas & junk', () => {
 			const html = '<html><body>hi</body></html>';
 			const doctyped = `<!DOCTYPE html>${html}`;
 			const junkA = `  <xml>aslkdjasdlkjasd ${html}`;
@@ -90,7 +91,7 @@ describe('Content Processing', () => {
 		});
 
 
-		it ('parseHTML parses text into DOM', () => {
+		test ('parseHTML parses text into DOM', () => {
 			const html = '<html><body><div id="content">hi</div></body></html>';
 			const dom = parseHTML(html);
 
@@ -108,7 +109,7 @@ describe('Content Processing', () => {
 		});
 
 
-		it ('filterContent removes untrusted elements, and attributes', () => {
+		test ('filterContent removes untrusted elements, and attributes', () => {
 			const html = `
 				<!DOCTYPE html>
 				<html>
@@ -144,7 +145,7 @@ describe('Content Processing', () => {
 		});
 
 
-		it ('getHTMLSnippet limits character count of text nodes only', () => {
+		test ('getHTMLSnippet limits character count of text nodes only', () => {
 			const html = `
 				<fieldset class="mBottom">
 					<legend>Lorem ipsum: usage</legend>
@@ -164,7 +165,7 @@ describe('Content Processing', () => {
 		});
 
 
-		it ('parseWidgets', () => {
+		test ('parseWidgets', () => {
 			const dom = parseHTML(`
 				<div>
 					<object type="funtimes">
@@ -210,10 +211,10 @@ describe('Content Processing', () => {
 		});
 	});
 
-	describe('Processes Content', () => {
+	describe ('Processes Content', () => {
 
-		it ('Get Processed Packet', (done) => {
-			const error = jasmine.createSpy('Error');
+		test ('Get Processed Packet', (done) => {
+			const error = jest.fn('Error');
 			const originalPacket = {content: SAMPLE_CONTENT, arbitrary: 'value'};
 			const dummyStrats = {
 				'span[itemprop=nti-data-markupdisabled]': () => ({}),

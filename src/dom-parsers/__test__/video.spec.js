@@ -1,11 +1,13 @@
+/* eslint-env jest */
 import {getModel} from 'nti-lib-interfaces';
 
 import parseVideo, {getVideosFromDom} from '../video';
+
 import {makeDOM} from './tools';
 
 const Video = getModel('video');
 
-describe('DOM Parsers: Parse Video Elements', () => {
+describe ('DOM Parsers: Parse Video Elements', () => {
 	const originalConfig = global.$AppConfig;
 
 	afterEach(() => global.$AppConfig = originalConfig);
@@ -16,7 +18,7 @@ describe('DOM Parsers: Parse Video Elements', () => {
 		};
 	});
 
-	it ('parseVideo should return a valid object', () => {
+	test ('parseVideo should return a valid object', () => {
 		const vid = makeDOM(`
 			<object class="ntivideo"
 				data-ntiid="tag:nextthought.com,2011-10:LitWorld-NTIVideo-LitClub_Celebrations.ntivideo.video_Hello_Song_Annie_Foley"
@@ -97,7 +99,7 @@ describe('DOM Parsers: Parse Video Elements', () => {
 
 
 	describe ('getVideosFromDom', () => {
-		it ('should find videos', () => {
+		test ('should find videos', () => {
 			const videos = makeDOM(`
 				<span>
 					<object class="ntivideo"

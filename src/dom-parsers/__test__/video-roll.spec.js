@@ -1,7 +1,9 @@
+/* eslint-env jest */
 import parseVideoRoll from '../video-roll';
+
 import {makeDOM} from './tools';
 
-describe('DOM Parsers: Parse Video Roll Elements', () => {
+describe ('DOM Parsers: Parse Video Roll Elements', () => {
 	const originalConfig = global.$AppConfig;
 
 	afterEach(() => global.$AppConfig = originalConfig);
@@ -12,7 +14,7 @@ describe('DOM Parsers: Parse Video Roll Elements', () => {
 		};
 	});
 
-	it ('parseVideoRoll should return a valid object', () => {
+	test ('parseVideoRoll should return a valid object', () => {
 		const roll = makeDOM(`
 			<object data="tag:nextthought.com,2011-10:LitWorld-NTIVR-LitClub_Celebrations.ntivideoroll.1"
 				data-ntiid="tag:nextthought.com,2011-10:LitWorld-NTIVR-LitClub_Celebrations.ntivideoroll.1"

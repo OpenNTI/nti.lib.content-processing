@@ -1,3 +1,4 @@
+/* eslint-env jest */
 import {getModel} from 'nti-lib-interfaces';
 
 import parseFramedElement from '../framed-elements';
@@ -6,18 +7,18 @@ import {makeDOM} from './tools';
 
 const Video = getModel('video');
 
-describe('DOM Parsers: Parse Framed Elements', () => {
+describe ('DOM Parsers: Parse Framed Elements', () => {
 	const originalConfig = global.$AppConfig;
 
-	afterEach(() => global.$AppConfig = originalConfig);
+	afterEach (() => global.$AppConfig = originalConfig);
 
-	beforeEach(() => {
+	beforeEach (() => {
 		global.$AppConfig = {
 			nodeInterface: {}
 		};
 	});
 
-	it ('parseFramedElement should return a valid object', () => {
+	test ('parseFramedElement should return a valid object', () => {
 		const frame = makeDOM(`
 			<span itemprop="nti-data-markupdisabled">
 				<img crossorigin="anonymous"
@@ -57,7 +58,7 @@ describe('DOM Parsers: Parse Framed Elements', () => {
 		});
 	});
 
-	it ('markup allowed', () => {
+	test ('markup allowed', () => {
 		//markupenabled is the trigger to turn on markable
 		const frame = makeDOM(`
 			<span itemprop="nti-data-markupenabled">
@@ -79,7 +80,7 @@ describe('DOM Parsers: Parse Framed Elements', () => {
 		expect(json.item.markable).toBe(true);
 	});
 
-	it ('zoomable', () => {
+	test ('zoomable', () => {
 		const frame = makeDOM(`
 			<span itemprop="nti-data-markupdisabled">
 				<img crossorigin="anonymous"
@@ -100,7 +101,7 @@ describe('DOM Parsers: Parse Framed Elements', () => {
 		expect(json.item.source.size).toBe(1);
 	});
 
-	it ('handle unexpected', () => {
+	test ('handle unexpected', () => {
 		const frame = makeDOM(`
 			<span itemprop="nti-data-markupdisabled">
 				asd
@@ -112,7 +113,7 @@ describe('DOM Parsers: Parse Framed Elements', () => {
 		expect(json.item).toEqual({markable: false});
 	});
 
-	it ('handle video', () => {
+	test ('handle video', () => {
 		const frame = makeDOM(`
 			<span itemprop="nti-data-markupdisabled">
 				<object class="ntivideo"
