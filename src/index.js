@@ -3,8 +3,8 @@ import uuid from 'uuid';
 
 import DEFAULT_STRATEGIES from './dom-parsers';
 
-const MARKER_REGEX = /nti:widget-marker\[([^\]\>]+)\]/i;
-const WIDGET_MARKER_REGEX = /<!--(?:[^\]>]*)(nti:widget-marker\[(?:[^\]\>]+)\])(?:[^\]>]*)-->/ig;
+const MARKER_REGEX = /nti:widget-marker\[([^]\>]+)\]/i;
+const WIDGET_MARKER_REGEX = /<!--(?:[^\]>]*)(nti:widget-marker\[(?:[^\]>]+)\])(?:[^\]>]*)-->/ig;
 
 const DOCUMENT_NODE = 9;// Node.DOCUMENT_NODE
 
@@ -25,10 +25,10 @@ export function parseHTML (htmlString) {
 	const parser = (typeof DOMParser !== 'undefined') && new DOMParser();
 
 	let doc = parser && (
-				parser.parseFromString(html, 'text/html')
-				// ||
-				// parser.parseFromString(html, 'text/xml')
-			);
+		parser.parseFromString(html, 'text/html')
+		// ||
+		// parser.parseFromString(html, 'text/xml')
+	);
 
 	if (!doc) {
 		doc = document.createElement('html');
@@ -59,7 +59,7 @@ export function processContent (packet, strategies = DEFAULT_STRATEGIES) {
 		let elementFactory = doc.nodeType === DOCUMENT_NODE ? doc : document;
 		let body = doc.querySelector('body');
 		let styles = Array.from(doc.querySelectorAll('link[rel=stylesheet]'))
-						.map(i=>i.getAttribute('href'));
+			.map(i=>i.getAttribute('href'));
 
 		let widgets = indexArrayByKey(parseWidgets(strategies, doc, elementFactory), 'guid');
 
@@ -182,7 +182,7 @@ export function filterContent (html) {
 	let out = html;
 
 	for (let tag of ['head', 'object', 'script', 'iframe', 'frameset', 'frame']) {
-		let re = new RegExp(`<${tag}[^>]*>(.|\n)*?<\\/${tag}>\s*`, 'gi');
+		let re = new RegExp(`<${tag}[^>]*>(.|\\n)*?<\\/${tag}>\\s*`, 'gi');
 		out = out.replace(re, '');
 	}
 
@@ -190,7 +190,7 @@ export function filterContent (html) {
 	out = out.replace(/\s*(class|id|name|style)=".*?"/ig, '');
 
 	// strip all tags, except allowed
-	out = out.replace(/<\/?([^\/\s>]+)[^>]*?>\s*/gm, allowedTags);
+	out = out.replace(/<\/?([^/\s>]+)[^>]*?>\s*/gm, allowedTags);
 
 	out = out.trim();
 

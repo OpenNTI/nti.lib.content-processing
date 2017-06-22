@@ -197,7 +197,7 @@ describe ('Content Processing', () => {
 			}
 
 			const placeholders = getCommentNodes(dom)
-									.filter(x => /nti\:widget\-marker/.test(x.textContent));
+				.filter(x => /nti:widget-marker/.test(x.textContent));
 
 			expect(placeholders.length).toBe(2);
 
