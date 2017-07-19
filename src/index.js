@@ -3,7 +3,7 @@ import uuid from 'uuid';
 
 import DEFAULT_STRATEGIES from './dom-parsers';
 
-const MARKER_REGEX = /nti:widget-marker\[([^]\>]+)\]/i;
+const MARKER_REGEX = /nti:widget-marker\[([^]>]+)\]/i;
 const WIDGET_MARKER_REGEX = /<!--(?:[^\]>]*)(nti:widget-marker\[(?:[^\]>]+)\])(?:[^\]>]*)-->/ig;
 
 const DOCUMENT_NODE = 9;// Node.DOCUMENT_NODE
