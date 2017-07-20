@@ -213,8 +213,7 @@ describe ('Content Processing', () => {
 
 	describe ('Processes Content', () => {
 
-		test ('Get Processed Packet', (done) => {
-			const error = jest.fn('Error');
+		test ('Get Processed Packet', () => {
 			const originalPacket = {content: SAMPLE_CONTENT, arbitrary: 'value'};
 			const dummyStrats = {
 				'span[itemprop=nti-data-markupdisabled]': () => ({}),
@@ -228,25 +227,19 @@ describe ('Content Processing', () => {
 			//:/ Blame some browsers (safari) for async doc parsing.
 			// So we will normalize...
 
-			Promise.resolve(results)
+			return Promise.resolve(results)
 				.then(packet => {
 					expect(packet).not.toBe(originalPacket);
 					expect(packet.arbitrary).toBe('value');
 					expect(packet.content).toBeTruthy();
+					expect(packet.body.every(x => typeof x === 'object' ? true : !x.includes('nti:widget-marker'))).toBeTruthy();
 					expect(typeof packet.content).toBe('string');
 					expect(Array.isArray(packet.body)).toBe(true);
 					expect(packet.body.every(x => /object|string/.test(typeof x))).toBeTruthy();
 					expect(packet.styles).toEqual(['styles/styles.css', 'styles/content.css']);
 					expect(packet.widgets).toBeTruthy();
 					expect(Object.keys(packet.widgets).length).toBe(2);
-				})
-				.catch(error)
-				.then(() =>{
-					expect(error).not.toHaveBeenCalled();
-					done();
 				});
-
 		});
-
 	});
 });
