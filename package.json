@@ -8,7 +8,6 @@
   "files": [
     "lib"
   ],
-  "testEnvironment": "jsdom",
   "scripts": {
     "test": "nti-lib-scripts test",
     "start": "nti-lib-scripts test --watch",
