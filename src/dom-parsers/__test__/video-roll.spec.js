@@ -129,6 +129,7 @@ describe ('DOM Parsers: Parse Video Roll Elements', () => {
 				isVideo: true,
 				NO_TRANSCRIPT: 'No Transcript',
 				NO_TRANSCRIPT_LANG: 'No Transcript for the requested language.',
+				EXISTING_TRANSCRIPT: 'A Transcript already exists',
 				class: 'ntivideo',
 				dataset: {
 					ntiid: 'tag:nextthought.com,2011-10:LitWorld-NTIVideo-LitClub_Celebrations.ntivideo.video_Hello_Song_Annie_Foley'
@@ -172,6 +173,7 @@ describe ('DOM Parsers: Parse Video Roll Elements', () => {
 				isVideo: true,
 				NO_TRANSCRIPT: 'No Transcript',
 				NO_TRANSCRIPT_LANG: 'No Transcript for the requested language.',
+				EXISTING_TRANSCRIPT: 'A Transcript already exists',
 				class: 'ntivideo',
 				dataset: {
 					ntiid: 'tag:nextthought.com,2011-10:LitWorld-NTIVideo-LitClub_Celebrations.ntivideo.video_Hello_Song_Cora'
