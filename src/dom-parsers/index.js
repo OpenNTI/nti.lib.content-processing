@@ -13,6 +13,7 @@ export default {
 	'object[type$=ntislidedeck]': parseDomObject,
 	'object[type$=ntislidevideo][itemprop=presentation-card]': parseDomObject,
 	'object[type$=ntivideo][itemprop=presentation-video]': parseVideo,
+	'object[type$=ntivideoref]': parseDomObject,
 
 	'object[type$=videoroll]': parseVideoRoll,
 	'object[type$=image-collection]': parseImageRoll,
