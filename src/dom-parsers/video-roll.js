@@ -1,8 +1,8 @@
 import parseDomObject from './object';
-import {getVideosFromDom} from './video';
+import {getVideosFromDom, fixType} from './video';
 
 export default function parseElement (el) {
-	let data = parseDomObject(el);
+	const data = fixType(parseDomObject(el));
 
 	data.videos = getVideosFromDom(el);
 
