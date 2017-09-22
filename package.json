@@ -28,7 +28,7 @@
   },
   "dependencies": {
     "nti-lib-dom": "^1.0.0",
-    "nti-lib-interfaces": "^1.0.0",
+    "nti-lib-interfaces": "^1.63.0",
     "nti-util-logger": "^1.0.0",
     "nti-web-client": "^1.0.0",
     "uuid": "^3.0.1"
