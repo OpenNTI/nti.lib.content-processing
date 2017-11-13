@@ -68,6 +68,7 @@ describe ('DOM Parsers: Parse Video Elements', () => {
 					width: '640'
 				},
 				title: 'undefined',
+				type: 'application/vnd.nextthought.videosource',
 				service: 'youtube',
 				source: '-no2o7TeHNA',
 				poster: '//img.youtube.com/vi/-no2o7TeHNA/0.jpg',
