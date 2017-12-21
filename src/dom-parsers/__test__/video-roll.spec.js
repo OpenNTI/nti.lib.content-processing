@@ -79,139 +79,155 @@ describe ('DOM Parsers: Parse Video Roll Elements', () => {
 			ntiid: 'tag:nextthought.com,2011-10:LitWorld-NTIVR-LitClub_Celebrations.ntivideoroll.1',
 			title: 'The Hello Song',
 			description: 'Watch examples of the Hello Song',
-			children: [{
-				class: 'ntivideo',
-				dataset: {
+			children: [
+				{
+					class: 'ntivideo',
+					dataset: {
+						ntiid: 'tag:nextthought.com,2011-10:LitWorld-NTIVideo-LitClub_Celebrations.ntivideo.video_Hello_Song_Annie_Foley'
+					},
+					itemprop: 'presentation-video',
+					type: 'application/vnd.nextthought.ntivideo',
+					title: 'Hello Song Annie Foley',
+					children: [
+						{
+							dataset: {
+								height: '360',
+								priority: '0',
+								width: '640'
+							},
+							type: 'application/vnd.nextthought.videosource',
+							title: 'undefined',
+							service: 'youtube',
+							source: '-no2o7TeHNA',
+							height: '360',
+							width: '640',
+							poster: '//img.youtube.com/vi/-no2o7TeHNA/0.jpg',
+							thumbnail: '//img.youtube.com/vi/-no2o7TeHNA/1.jpg'
+						}
+					]
+				}, {
+					class: 'ntivideo',
+					dataset: {
+						ntiid: 'tag:nextthought.com,2011-10:LitWorld-NTIVideo-LitClub_Celebrations.ntivideo.video_Hello_Song_Cora'
+					},
+					itemprop: 'presentation-video',
+					type: 'application/vnd.nextthought.ntivideo',
+					title: 'Hello Song Cora',
+					children: [
+						{
+							dataset: {
+								height: '360',
+								priority: '0',
+								width: '640'
+							},
+							type: 'application/vnd.nextthought.videosource',
+							service: 'youtube',
+							source: 'mtahHh-Umrk',
+							height: '360',
+							width: '640',
+							poster: '//img.youtube.com/vi/mtahHh-Umrk/0.jpg',
+							thumbnail: '//img.youtube.com/vi/mtahHh-Umrk/1.jpg'
+						}
+					]
+				}
+			],
+			videos: [
+				{
+					isVideo: true,
+					NO_TRANSCRIPT: 'No Transcript',
+					NO_TRANSCRIPT_LANG: 'No Transcript for the requested language.',
+					EXISTING_TRANSCRIPT: 'A Transcript already exists',
+					class: 'ntivideo',
+					dataset: {
+						ntiid: 'tag:nextthought.com,2011-10:LitWorld-NTIVideo-LitClub_Celebrations.ntivideo.video_Hello_Song_Annie_Foley'
+					},
+					itemprop: 'presentation-video',
+					type: 'application/vnd.nextthought.ntivideo',
+					title: 'Hello Song Annie Foley',
+					children: [
+						{
+							dataset: {
+								height: '360',
+								priority: '0',
+								width: '640'
+							},
+							type: 'application/vnd.nextthought.videosource',
+							title: 'undefined',
+							service: 'youtube',
+							source: '-no2o7TeHNA',
+							height: '360',
+							width: '640',
+							poster: '//img.youtube.com/vi/-no2o7TeHNA/0.jpg',
+							thumbnail: '//img.youtube.com/vi/-no2o7TeHNA/1.jpg'
+						}
+					],
+					sources: [
+						{
+							dataset: {
+								height: '360',
+								priority: '0',
+								width: '640'
+							},
+							type: 'application/vnd.nextthought.videosource',
+							title: 'undefined',
+							service: 'youtube',
+							source: '-no2o7TeHNA',
+							height: '360',
+							width: '640',
+							poster: '//img.youtube.com/vi/-no2o7TeHNA/0.jpg',
+							thumbnail: '//img.youtube.com/vi/-no2o7TeHNA/1.jpg'
+						}
+					],
+					MimeType: 'application/vnd.nextthought.ntivideo',
 					ntiid: 'tag:nextthought.com,2011-10:LitWorld-NTIVideo-LitClub_Celebrations.ntivideo.video_Hello_Song_Annie_Foley'
-				},
-				itemprop: 'presentation-video',
-				type: 'application/vnd.nextthought.ntivideo',
-				title: 'Hello Song Annie Foley',
-				children: [{
+				}, {
+					isVideo: true,
+					NO_TRANSCRIPT: 'No Transcript',
+					NO_TRANSCRIPT_LANG: 'No Transcript for the requested language.',
+					EXISTING_TRANSCRIPT: 'A Transcript already exists',
+					class: 'ntivideo',
 					dataset: {
-						height: '360',
-						priority: '0',
-						width: '640'
+						ntiid: 'tag:nextthought.com,2011-10:LitWorld-NTIVideo-LitClub_Celebrations.ntivideo.video_Hello_Song_Cora'
 					},
-					type: 'application/vnd.nextthought.videosource',
-					title: 'undefined',
-					service: 'youtube',
-					source: '-no2o7TeHNA',
-					height: '360',
-					width: '640',
-					poster: '//img.youtube.com/vi/-no2o7TeHNA/0.jpg',
-					thumbnail: '//img.youtube.com/vi/-no2o7TeHNA/1.jpg'
-				}]
-			}, {
-				class: 'ntivideo',
-				dataset: {
+					itemprop: 'presentation-video',
+					type: 'application/vnd.nextthought.ntivideo',
+					title: 'Hello Song Cora',
+					children: [
+						{
+							dataset: {
+								height: '360',
+								priority: '0',
+								width: '640'
+							},
+							type: 'application/vnd.nextthought.videosource',
+							service: 'youtube',
+							source: 'mtahHh-Umrk',
+							height: '360',
+							width: '640',
+							poster: '//img.youtube.com/vi/mtahHh-Umrk/0.jpg',
+							thumbnail: '//img.youtube.com/vi/mtahHh-Umrk/1.jpg'
+						}
+					],
+					sources: [
+						{
+							dataset: {
+								height: '360',
+								priority: '0',
+								width: '640'
+							},
+							type: 'application/vnd.nextthought.videosource',
+							service: 'youtube',
+							source: 'mtahHh-Umrk',
+							height: '360',
+							width: '640',
+							poster: '//img.youtube.com/vi/mtahHh-Umrk/0.jpg',
+							thumbnail: '//img.youtube.com/vi/mtahHh-Umrk/1.jpg'
+						}
+					],
+					MimeType: 'application/vnd.nextthought.ntivideo',
 					ntiid: 'tag:nextthought.com,2011-10:LitWorld-NTIVideo-LitClub_Celebrations.ntivideo.video_Hello_Song_Cora'
-				},
-				itemprop: 'presentation-video',
-				type: 'application/vnd.nextthought.ntivideo',
-				title: 'Hello Song Cora',
-				children: [{
-					dataset: {
-						height: '360',
-						priority: '0',
-						width: '640'
-					},
-					type: 'application/vnd.nextthought.videosource',
-					service: 'youtube',
-					source: 'mtahHh-Umrk',
-					height: '360',
-					width: '640',
-					poster: '//img.youtube.com/vi/mtahHh-Umrk/0.jpg',
-					thumbnail: '//img.youtube.com/vi/mtahHh-Umrk/1.jpg'
-				}]
-			}],
-			videos: [{
-				isVideo: true,
-				NO_TRANSCRIPT: 'No Transcript',
-				NO_TRANSCRIPT_LANG: 'No Transcript for the requested language.',
-				EXISTING_TRANSCRIPT: 'A Transcript already exists',
-				class: 'ntivideo',
-				dataset: {
-					ntiid: 'tag:nextthought.com,2011-10:LitWorld-NTIVideo-LitClub_Celebrations.ntivideo.video_Hello_Song_Annie_Foley'
-				},
-				itemprop: 'presentation-video',
-				type: 'application/vnd.nextthought.ntivideo',
-				title: 'Hello Song Annie Foley',
-				children: [{
-					dataset: {
-						height: '360',
-						priority: '0',
-						width: '640'
-					},
-					type: 'application/vnd.nextthought.videosource',
-					title: 'undefined',
-					service: 'youtube',
-					source: '-no2o7TeHNA',
-					height: '360',
-					width: '640',
-					poster: '//img.youtube.com/vi/-no2o7TeHNA/0.jpg',
-					thumbnail: '//img.youtube.com/vi/-no2o7TeHNA/1.jpg'
-				}],
-				sources: [{
-					dataset: {
-						height: '360',
-						priority: '0',
-						width: '640'
-					},
-					type: 'application/vnd.nextthought.videosource',
-					title: 'undefined',
-					service: 'youtube',
-					source: '-no2o7TeHNA',
-					height: '360',
-					width: '640',
-					poster: '//img.youtube.com/vi/-no2o7TeHNA/0.jpg',
-					thumbnail: '//img.youtube.com/vi/-no2o7TeHNA/1.jpg'
-				}],
-				MimeType: 'application/vnd.nextthought.ntivideo',
-				ntiid: 'tag:nextthought.com,2011-10:LitWorld-NTIVideo-LitClub_Celebrations.ntivideo.video_Hello_Song_Annie_Foley'
-			}, {
-				isVideo: true,
-				NO_TRANSCRIPT: 'No Transcript',
-				NO_TRANSCRIPT_LANG: 'No Transcript for the requested language.',
-				EXISTING_TRANSCRIPT: 'A Transcript already exists',
-				class: 'ntivideo',
-				dataset: {
-					ntiid: 'tag:nextthought.com,2011-10:LitWorld-NTIVideo-LitClub_Celebrations.ntivideo.video_Hello_Song_Cora'
-				},
-				itemprop: 'presentation-video',
-				type: 'application/vnd.nextthought.ntivideo',
-				title: 'Hello Song Cora',
-				children: [{
-					dataset: {
-						height: '360',
-						priority: '0',
-						width: '640'
-					},
-					type: 'application/vnd.nextthought.videosource',
-					service: 'youtube',
-					source: 'mtahHh-Umrk',
-					height: '360',
-					width: '640',
-					poster: '//img.youtube.com/vi/mtahHh-Umrk/0.jpg',
-					thumbnail: '//img.youtube.com/vi/mtahHh-Umrk/1.jpg'
-				}],
-				sources: [{
-					dataset: {
-						height: '360',
-						priority: '0',
-						width: '640'
-					},
-					type: 'application/vnd.nextthought.videosource',
-					service: 'youtube',
-					source: 'mtahHh-Umrk',
-					height: '360',
-					width: '640',
-					poster: '//img.youtube.com/vi/mtahHh-Umrk/0.jpg',
-					thumbnail: '//img.youtube.com/vi/mtahHh-Umrk/1.jpg'
-				}],
-				MimeType: 'application/vnd.nextthought.ntivideo',
-				ntiid: 'tag:nextthought.com,2011-10:LitWorld-NTIVideo-LitClub_Celebrations.ntivideo.video_Hello_Song_Cora'
-			}]
+				}
+			]
 		});
 	});
 

@@ -63,36 +63,40 @@ describe ('DOM Parsers: Parse Video Elements', () => {
 			itemprop: 'presentation-video',
 			type: 'application/vnd.nextthought.ntivideo',
 			title: 'Hello Song Annie Foley',
-			children: [{
-				dataset: {
+			children: [
+				{
+					dataset: {
+						height: '360',
+						priority: '0',
+						width: '640'
+					},
+					type: 'application/vnd.nextthought.videosource',
+					title: 'undefined',
+					service: 'youtube',
+					source: '-no2o7TeHNA',
 					height: '360',
-					priority: '0',
-					width: '640'
-				},
-				type: 'application/vnd.nextthought.videosource',
-				title: 'undefined',
-				service: 'youtube',
-				source: '-no2o7TeHNA',
-				height: '360',
-				width: '640',
-				poster: '//img.youtube.com/vi/-no2o7TeHNA/0.jpg',
-				thumbnail: '//img.youtube.com/vi/-no2o7TeHNA/1.jpg'
-			}],
-			sources: [{
-				dataset: {
+					width: '640',
+					poster: '//img.youtube.com/vi/-no2o7TeHNA/0.jpg',
+					thumbnail: '//img.youtube.com/vi/-no2o7TeHNA/1.jpg'
+				}
+			],
+			sources: [
+				{
+					dataset: {
+						height: '360',
+						priority: '0',
+						width: '640'
+					},
+					type: 'application/vnd.nextthought.videosource',
+					title: 'undefined',
+					service: 'youtube',
+					source: '-no2o7TeHNA',
 					height: '360',
-					priority: '0',
-					width: '640'
-				},
-				type: 'application/vnd.nextthought.videosource',
-				title: 'undefined',
-				service: 'youtube',
-				source: '-no2o7TeHNA',
-				height: '360',
-				width: '640',
-				poster: '//img.youtube.com/vi/-no2o7TeHNA/0.jpg',
-				thumbnail: '//img.youtube.com/vi/-no2o7TeHNA/1.jpg'
-			}],
+					width: '640',
+					poster: '//img.youtube.com/vi/-no2o7TeHNA/0.jpg',
+					thumbnail: '//img.youtube.com/vi/-no2o7TeHNA/1.jpg'
+				}
+			],
 			MimeType: 'application/vnd.nextthought.ntivideo',
 			ntiid: 'tag:nextthought.com,2011-10:LitWorld-NTIVideo-LitClub_Celebrations.ntivideo.video_Hello_Song_Annie_Foley'
 		});
