@@ -58,23 +58,7 @@ describe ('DOM Parsers: Parse Video Elements', () => {
 			itemprop: 'presentation-video',
 			type: 'application/vnd.nextthought.ntivideo',
 			title: 'Hello Song Annie Foley',
-			children: [
-				{
-					dataset: {
-						height: '360',
-						priority: '0',
-						width: '640'
-					},
-					type: 'application/vnd.nextthought.videosource',
-					title: 'undefined',
-					service: 'youtube',
-					source: '-no2o7TeHNA',
-					height: '360',
-					width: '640',
-					poster: '//img.youtube.com/vi/-no2o7TeHNA/0.jpg',
-					thumbnail: '//img.youtube.com/vi/-no2o7TeHNA/1.jpg'
-				}
-			],
+			children: [],
 			sources: [
 				{
 					MimeType: 'application/vnd.nextthought.videosource',
@@ -87,8 +71,8 @@ describe ('DOM Parsers: Parse Video Elements', () => {
 					title: 'undefined',
 					service: 'youtube',
 					source: '-no2o7TeHNA',
-					height: '360',
-					width: '640',
+					height: 360,
+					width: 640,
 					poster: '//img.youtube.com/vi/-no2o7TeHNA/0.jpg',
 					thumbnail: '//img.youtube.com/vi/-no2o7TeHNA/1.jpg'
 				}

@@ -28,8 +28,10 @@ export function getVideosFromDom (contentElement) {
 
 
 export default function parseVideo (contentElement) {
-	let o = parseDomObject(contentElement),
-		s = o.sources = [];
+	const o = parseDomObject(contentElement);
+	const s = o.sources = [];
+
+	o.children = o.children.filter(x => !/videosource$/i.test(x.type));
 
 	fixType(o);
 	o.ntiid = o.ntiid || (o.dataset || {}).ntiid;
@@ -37,6 +39,10 @@ export default function parseVideo (contentElement) {
 	for (let source of Array.from(contentElement.querySelectorAll(SOURCE_QS))) {
 		source = parseDomObject(source);
 		fixType(source);
+
+		source.height = parseInt(source.height, 10) || null;
+		source.width = parseInt(source.width, 10) || null;
+
 		s.push(source);
 	}
 
