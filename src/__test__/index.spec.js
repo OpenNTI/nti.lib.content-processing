@@ -77,6 +77,11 @@ const SAMPLE_CONTENT = `
 
 
 describe ('Content Processing', () => {
+	global.$AppConfig = {
+		nodeService: {
+			//mock service
+		}
+	};
 
 	describe ('Helpers', () => {
 
@@ -91,9 +96,9 @@ describe ('Content Processing', () => {
 		});
 
 
-		test ('parseHTML parses text into DOM', () => {
+		test ('parseHTML parses text into DOM', async () => {
 			const html = '<html><body><div id="content">hi</div></body></html>';
-			const dom = parseHTML(html);
+			const dom = await parseHTML(html);
 
 			expect(dom).not.toBe(html);
 			expect(dom).toBeTruthy();
@@ -165,8 +170,8 @@ describe ('Content Processing', () => {
 		});
 
 
-		test ('parseWidgets', () => {
-			const dom = parseHTML(`
+		test ('parseWidgets', async () => {
+			const dom = await parseHTML(`
 				<div>
 					<object type="funtimes">
 						<param name="test" value="foobar"/>
@@ -213,33 +218,25 @@ describe ('Content Processing', () => {
 
 	describe ('Processes Content', () => {
 
-		test ('Get Processed Packet', () => {
+		test ('Get Processed Packet', async () => {
 			const originalPacket = {content: SAMPLE_CONTENT, arbitrary: 'value'};
 			const dummyStrats = {
 				'span[itemprop=nti-data-markupdisabled]': () => ({}),
 				'ul.itemize': () => ({})
 			};
 
-			//The function we are testing:
-			const results = processContent(originalPacket, dummyStrats);
+			const packet = await processContent(originalPacket, dummyStrats);
 
-			//can be a packet or a Promise that fulfills with a packet.
-			//:/ Blame some browsers (safari) for async doc parsing.
-			// So we will normalize...
-
-			return Promise.resolve(results)
-				.then(packet => {
-					expect(packet).not.toBe(originalPacket);
-					expect(packet.arbitrary).toBe('value');
-					expect(packet.content).toBeTruthy();
-					expect(packet.body.every(x => typeof x === 'object' ? true : !x.includes('nti:widget-marker'))).toBeTruthy();
-					expect(typeof packet.content).toBe('string');
-					expect(Array.isArray(packet.body)).toBe(true);
-					expect(packet.body.every(x => /object|string/.test(typeof x))).toBeTruthy();
-					expect(packet.styles).toEqual(['styles/styles.css', 'styles/content.css']);
-					expect(packet.widgets).toBeTruthy();
-					expect(Object.keys(packet.widgets).length).toBe(2);
-				});
+			expect(packet).not.toBe(originalPacket);
+			expect(packet.arbitrary).toBe('value');
+			expect(packet.content).toBeTruthy();
+			expect(packet.body.every(x => typeof x === 'object' ? true : !x.includes('nti:widget-marker'))).toBeTruthy();
+			expect(typeof packet.content).toBe('string');
+			expect(Array.isArray(packet.body)).toBe(true);
+			expect(packet.body.every(x => /object|string/.test(typeof x))).toBeTruthy();
+			expect(packet.styles).toEqual(['styles/styles.css', 'styles/content.css']);
+			expect(packet.widgets).toBeTruthy();
+			expect(Object.keys(packet.widgets).length).toBe(2);
 		});
 	});
 });

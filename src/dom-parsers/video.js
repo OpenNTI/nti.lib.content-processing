@@ -1,5 +1,4 @@
 import {Models} from 'nti-lib-interfaces';
-import {getServer} from 'nti-web-client';
 
 import parseDomObject from './object';
 
@@ -22,24 +21,24 @@ export function fixType (o) {
 	return o;
 }
 
-export function getVideosFromDom (contentElement) {
+export function getVideosFromDom (contentElement, service) {
 	const videoObjects = [];
 
 
 	if (contentElement) {
 		Array.from(contentElement.querySelectorAll(VIDEO_QS)).forEach(v =>
-			videoObjects.push(parseVideo(v)));
+			videoObjects.push(parseVideo(v, service)));
 	}
 
 	return videoObjects;
 }
 
 
-export default function parseVideo (contentElement) {
-	const o = fixType(parseDomObject(contentElement));
+export default function parseVideo (contentElement, service) {
+	const o = fixType(parseDomObject(contentElement, service));
 
 	o.sources = Array.from(contentElement.querySelectorAll(SOURCE_QS))
-		.map(s => fixType(parseDomObject(s)));
+		.map(s => fixType(parseDomObject(s, service)));
 
-	return new Models.media.Video(getServer(), null, o);
+	return new Models.media.Video(service, null, o);
 }

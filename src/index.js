@@ -1,3 +1,4 @@
+import {getService} from 'nti-web-client';
 import {replaceNode, parent} from 'nti-lib-dom';
 import uuid from 'uuid';
 
@@ -6,9 +7,11 @@ import DEFAULT_STRATEGIES from './dom-parsers';
 const MARKER_REGEX = /nti:widget-marker\[([^\]>]+)\]/i;
 const WIDGET_MARKER_REGEX = /<!--(?:[^\]>]*)(nti:widget-marker\[(?:[^\]>]+)\])(?:[^\]>]*)-->/ig;
 
+const PARSE_TIMEOUT = 30 * 1000;//30 seconds. (in milliseconds)
 const DOCUMENT_NODE = 9;// Node.DOCUMENT_NODE
 
 const isReady = doc => doc.readyState !== 'loading';
+const sleep = t => new Promise(x => setTimeout(x, t));
 
 const indexArrayByKey = (array, key) => array.reduce((a, i) => (a[i[key]] = i, a), {});
 
@@ -20,7 +23,7 @@ export function getContent (raw) {
 }
 
 
-export function parseHTML (htmlString) {
+export async function parseHTML (htmlString) {
 	const html = getContent(htmlString);
 	const parser = (typeof DOMParser !== 'undefined') && new DOMParser();
 
@@ -40,6 +43,15 @@ export function parseHTML (htmlString) {
 		doc.readyState = 'interactive';
 	}
 
+	const start = Date.now();
+	while (!isReady(doc)) {
+		await sleep(100);
+
+		if ((Date.now() - start) > PARSE_TIMEOUT) {
+			throw new Error('Parse Timeout');
+		}
+	}
+
 	return doc;
 }
 
@@ -53,66 +65,31 @@ export function parseHTML (htmlString) {
  *                            an Object used to render the Widget.
  * @returns {object} A packet of data, content, body, styles and widgets. MAY return a promise that fulfills with said object.
  */
-export function processContent (packet, strategies = DEFAULT_STRATEGIES) {
+export async function processContent (packet, strategies = DEFAULT_STRATEGIES) {
+	const service = await getService();
+	const doc = await parseHTML(packet.content);
 
-	function process (doc) {
-		let elementFactory = doc.nodeType === DOCUMENT_NODE ? doc : document;
-		let body = doc.querySelector('body');
-		let styles = Array.from(doc.querySelectorAll('link[rel=stylesheet]'))
-			.map(i=>i.getAttribute('href'));
+	const elementFactory = doc.nodeType === DOCUMENT_NODE ? doc : document;
+	const body = doc.querySelector('body');
+	const styles = Array.from(doc.querySelectorAll('link[rel=stylesheet]'))
+		.map(i=>i.getAttribute('href'));
 
-		let widgets = indexArrayByKey(parseWidgets(strategies, doc, elementFactory), 'guid');
+	const widgets = indexArrayByKey(parseWidgets(strategies, doc, elementFactory, service), 'guid');
 
-		let bodyParts = body.innerHTML.split(WIDGET_MARKER_REGEX).map(part => {
-			let m = part.match(MARKER_REGEX);
-			if (m && m[1]) {
-				return widgets[m[1]];
-			}
-			return part;
-		});
-
-		return Object.assign({}, packet, {
-			content: body.innerHTML,
-			body: bodyParts,
-			styles: styles,
-			widgets: widgets
-		});
-	}
-
-
-	function wait (doc) {
-		return new Promise((ready, fail) => {
-			let tick = 0;
-
-			function check () {
-				if (isReady(doc)) {
-					return ready(doc);
-				}
-
-				//30sec
-				if (tick++ > 3000) {
-					return fail ('Parse Timeout');
-				}
-
-				setTimeout(check, 10);
-			}
-
-			check();
-		})
-			.then(process);
-	}
-
-	try {
-		const doc = parseHTML(packet.content);
-		if (isReady(doc)) {
-			return process(doc);
+	let bodyParts = body.innerHTML.split(WIDGET_MARKER_REGEX).map(part => {
+		let m = part.match(MARKER_REGEX);
+		if (m && m[1]) {
+			return widgets[m[1]];
 		}
+		return part;
+	});
 
-		return wait(doc);
-
-	} catch (e) {
-		return Promise.reject(e);
-	}
+	return Object.assign({}, packet, {
+		content: body.innerHTML,
+		body: bodyParts,
+		styles: styles,
+		widgets: widgets
+	});
 }
 
 
@@ -124,9 +101,10 @@ export function processContent (packet, strategies = DEFAULT_STRATEGIES) {
  * @param {Document} doc			The content to search.
  *
  * @param {Node} elementFactory		A Dom object that has an implementation for 'createComment'.
+ * @param {ServiceDocument} service	The Service document for your session.
  * @returns {object[]} An array of objects representing widgets.
  */
-export function parseWidgets (strategies, doc, elementFactory) {
+export function parseWidgets (strategies, doc, elementFactory, service) {
 
 	function makeMarker (id) {
 		return elementFactory.createComment('nti:widget-marker[' + id + ']');
@@ -151,7 +129,7 @@ export function parseWidgets (strategies, doc, elementFactory) {
 			.map(el => {
 
 				let id = el.getAttribute('id');
-				let result = strategies[selector](el) || {element: el};
+				let result = strategies[selector](el, service) || {element: el};
 
 				if (!id) {
 					el.setAttribute('id', (id = uuid()));
