@@ -65,11 +65,6 @@ describe ('DOM Parsers: Parse Video Roll Elements', () => {
 		//force the value to primitve objects...
 		const raw = JSON.parse(JSON.stringify(json));
 
-		raw.videos.forEach(v => v.sources.forEach(s => {
-			delete s['_eventsCount'];
-			delete s['domain'];
-		}));
-
 		expect(raw).toEqual({
 			data: 'tag:nextthought.com,2011-10:LitWorld-NTIVR-LitClub_Celebrations.ntivideoroll.1',
 			dataset: {

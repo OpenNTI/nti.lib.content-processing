@@ -46,11 +46,6 @@ describe ('DOM Parsers: Parse Video Elements', () => {
 
 		const raw = JSON.parse(JSON.stringify(json));
 
-		raw.sources.forEach(s => {
-			delete s['_eventsCount'];
-			delete s['domain'];
-		});
-
 		expect(raw).toEqual({
 			isVideo: true,
 			NO_TRANSCRIPT: 'No Transcript',
