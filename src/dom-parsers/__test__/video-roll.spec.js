@@ -163,6 +163,7 @@ describe ('DOM Parsers: Parse Video Roll Elements', () => {
 					],
 					sources: [
 						{
+							MimeType: 'application/vnd.nextthought.videosource',
 							dataset: {
 								height: '360',
 								priority: '0',
@@ -210,6 +211,7 @@ describe ('DOM Parsers: Parse Video Roll Elements', () => {
 					],
 					sources: [
 						{
+							MimeType: 'application/vnd.nextthought.videosource',
 							dataset: {
 								height: '360',
 								priority: '0',

@@ -82,6 +82,7 @@ describe ('DOM Parsers: Parse Video Elements', () => {
 			],
 			sources: [
 				{
+					MimeType: 'application/vnd.nextthought.videosource',
 					dataset: {
 						height: '360',
 						priority: '0',

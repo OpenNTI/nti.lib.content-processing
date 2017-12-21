@@ -36,7 +36,7 @@ export default function parseVideo (contentElement) {
 
 	for (let source of Array.from(contentElement.querySelectorAll(SOURCE_QS))) {
 		source = parseDomObject(source);
-		fixType(s);
+		fixType(source);
 		s.push(source);
 	}
 
