@@ -65,68 +65,73 @@ describe ('DOM Parsers: Parse Video Roll Elements', () => {
 		//force the value to primitve objects...
 		const raw = JSON.parse(JSON.stringify(json));
 
-		raw.videos.forEach(v => v.sources.forEach(s => {
-			delete s['_eventsCount'];
-			delete s['domain'];
-		}));
-
 		expect(raw).toEqual({
 			data: 'tag:nextthought.com,2011-10:LitWorld-NTIVR-LitClub_Celebrations.ntivideoroll.1',
 			dataset: {
 				ntiid: 'tag:nextthought.com,2011-10:LitWorld-NTIVR-LitClub_Celebrations.ntivideoroll.1'
 			},
+			description: 'Watch examples of the Hello Song',
 			MimeType: 'application/vnd.nextthought.videoroll',
 			NTIID: 'tag:nextthought.com,2011-10:LitWorld-NTIVR-LitClub_Celebrations.ntivideoroll.1',
 			ntiid: 'tag:nextthought.com,2011-10:LitWorld-NTIVR-LitClub_Celebrations.ntivideoroll.1',
-			type: 'application/vnd.nextthought.videoroll',
 			title: 'The Hello Song',
-			description: 'Watch examples of the Hello Song',
-			videos: [{
-				isVideo: true,
-				NO_TRANSCRIPT: 'No Transcript',
-				NO_TRANSCRIPT_LANG: 'No Transcript for the requested language.',
-				EXISTING_TRANSCRIPT: 'A Transcript already exists',
-				itemprop: 'presentation-video',
-				title: 'Hello Song Annie Foley',
-				sources: [{
-					MimeType: 'application/vnd.nextthought.videosource',
-					dataset: {
-						height: '360',
-						priority: '0',
-						width: '640'
-					},
-					title: 'undefined',
-					type: 'application/vnd.nextthought.videosource',
-					service: 'youtube',
-					source: '-no2o7TeHNA',
-					poster: '//img.youtube.com/vi/-no2o7TeHNA/0.jpg',
-					thumbnail: '//img.youtube.com/vi/-no2o7TeHNA/1.jpg'
-				}],
-				MimeType: 'application/vnd.nextthought.ntivideo',
-				NTIID: 'tag:nextthought.com,2011-10:LitWorld-NTIVideo-LitClub_Celebrations.ntivideo.video_Hello_Song_Annie_Foley'
-			}, {
-				isVideo: true,
-				NO_TRANSCRIPT: 'No Transcript',
-				NO_TRANSCRIPT_LANG: 'No Transcript for the requested language.',
-				EXISTING_TRANSCRIPT: 'A Transcript already exists',
-				itemprop: 'presentation-video',
-				title: 'Hello Song Cora',
-				sources: [{
-					MimeType: 'application/vnd.nextthought.videosource',
-					dataset: {
-						height: '360',
-						priority: '0',
-						width: '640'
-					},
-					service: 'youtube',
-					source: 'mtahHh-Umrk',
-					poster: '//img.youtube.com/vi/mtahHh-Umrk/0.jpg',
-					thumbnail: '//img.youtube.com/vi/mtahHh-Umrk/1.jpg',
-					type: 'application/vnd.nextthought.videosource'
-				}],
-				MimeType: 'application/vnd.nextthought.ntivideo',
-				NTIID: 'tag:nextthought.com,2011-10:LitWorld-NTIVideo-LitClub_Celebrations.ntivideo.video_Hello_Song_Cora'
-			}]
+			type: 'application/vnd.nextthought.videoroll',
+			videos: [
+				{
+					isVideo: true,
+					MimeType: 'application/vnd.nextthought.ntivideo',
+					NO_TRANSCRIPT: 'No Transcript',
+					NO_TRANSCRIPT_LANG: 'No Transcript for the requested language.',
+					NTIID: 'tag:nextthought.com,2011-10:LitWorld-NTIVideo-LitClub_Celebrations.ntivideo.video_Hello_Song_Annie_Foley',
+					EXISTING_TRANSCRIPT: 'A Transcript already exists',
+					itemprop: 'presentation-video',
+					title: 'Hello Song Annie Foley',
+					sources: [
+						{
+							MimeType: 'application/vnd.nextthought.videosource',
+							dataset: {
+								height: '360',
+								priority: '0',
+								width: '640'
+							},
+							type: 'application/vnd.nextthought.videosource',
+							title: 'undefined',
+							service: 'youtube',
+							source: '-no2o7TeHNA',
+							height: 360,
+							width: 640,
+							poster: '//img.youtube.com/vi/-no2o7TeHNA/0.jpg',
+							thumbnail: '//img.youtube.com/vi/-no2o7TeHNA/1.jpg'
+						}
+					]
+				}, {
+					isVideo: true,
+					MimeType: 'application/vnd.nextthought.ntivideo',
+					NO_TRANSCRIPT: 'No Transcript',
+					NO_TRANSCRIPT_LANG: 'No Transcript for the requested language.',
+					NTIID: 'tag:nextthought.com,2011-10:LitWorld-NTIVideo-LitClub_Celebrations.ntivideo.video_Hello_Song_Cora',
+					EXISTING_TRANSCRIPT: 'A Transcript already exists',
+					itemprop: 'presentation-video',
+					title: 'Hello Song Cora',
+					sources: [
+						{
+							MimeType: 'application/vnd.nextthought.videosource',
+							dataset: {
+								height: '360',
+								priority: '0',
+								width: '640'
+							},
+							type: 'application/vnd.nextthought.videosource',
+							service: 'youtube',
+							source: 'mtahHh-Umrk',
+							height: 360,
+							width: 640,
+							poster: '//img.youtube.com/vi/mtahHh-Umrk/0.jpg',
+							thumbnail: '//img.youtube.com/vi/mtahHh-Umrk/1.jpg'
+						}
+					]
+				}
+			]
 		});
 	});
 

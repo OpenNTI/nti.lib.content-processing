@@ -46,11 +46,6 @@ describe ('DOM Parsers: Parse Video Elements', () => {
 
 		const raw = JSON.parse(JSON.stringify(json));
 
-		raw.sources.forEach(s => {
-			delete s['_eventsCount'];
-			delete s['domain'];
-		});
-
 		expect(raw).toEqual({
 			isVideo: true,
 			NO_TRANSCRIPT: 'No Transcript',
@@ -60,20 +55,24 @@ describe ('DOM Parsers: Parse Video Elements', () => {
 			NTIID: 'tag:nextthought.com,2011-10:LitWorld-NTIVideo-LitClub_Celebrations.ntivideo.video_Hello_Song_Annie_Foley',
 			itemprop: 'presentation-video',
 			title: 'Hello Song Annie Foley',
-			sources: [{
-				MimeType: 'application/vnd.nextthought.videosource',
-				dataset: {
-					height: '360',
-					priority: '0',
-					width: '640'
-				},
-				title: 'undefined',
-				type: 'application/vnd.nextthought.videosource',
-				service: 'youtube',
-				source: '-no2o7TeHNA',
-				poster: '//img.youtube.com/vi/-no2o7TeHNA/0.jpg',
-				thumbnail: '//img.youtube.com/vi/-no2o7TeHNA/1.jpg'
-			}]
+			sources: [
+				{
+					MimeType: 'application/vnd.nextthought.videosource',
+					dataset: {
+						height: '360',
+						priority: '0',
+						width: '640'
+					},
+					type: 'application/vnd.nextthought.videosource',
+					title: 'undefined',
+					service: 'youtube',
+					source: '-no2o7TeHNA',
+					height: 360,
+					width: 640,
+					poster: '//img.youtube.com/vi/-no2o7TeHNA/0.jpg',
+					thumbnail: '//img.youtube.com/vi/-no2o7TeHNA/1.jpg'
+				}
+			]
 		});
 	});
 
