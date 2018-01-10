@@ -36,6 +36,38 @@ describe ('DOM Parsers: DOM to Object Parser', () => {
 		expect(json.dom).not.toBe(obj);
 	});
 
+	test ('Pulls NTIID out of params', () => {
+		const id = 'fancy-thing';
+		const ntiid = 'tag:nextthought.com:test';
+		const type = 'application/vnd.next....';
+		const obj = makeDOM(`
+			<object id="${id}" data-source="abc" type="${type}">
+				<param name="foo" value="bar"></param>
+				<param name="ntiid" value="${ntiid}"></param>
+				<param name="something" value="baz"></param>
+				<p>hey every body!</p>
+			</object>
+		`);
+
+		const json = parseDomObject(obj);
+
+		expect(json).toEqual({
+			id,
+			type,
+			foo: 'bar',
+			something: 'baz',
+			ntiid,
+			dataset: {
+				source: 'abc'
+			}
+		});
+
+
+		expect(json.dom).toBeTruthy();
+		expect(json.dom.nodeType).toBe(Node.ELEMENT_NODE);
+		expect(json.dom).not.toBe(obj);
+	});
+
 
 	test ('Should work on any node', () => {
 		const src = 'generic.png';
