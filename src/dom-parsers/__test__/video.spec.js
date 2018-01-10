@@ -40,7 +40,7 @@ describe ('DOM Parsers: Parse Video Elements', () => {
 			</object>
 		`);
 
-		const json = parseVideo(vid);
+		const json = parseVideo(vid, null);
 
 		expect(json instanceof Video).toBeTruthy();
 
@@ -119,7 +119,7 @@ describe ('DOM Parsers: Parse Video Elements', () => {
 				</span>
 			`);
 
-			const result = getVideosFromDom(videos);
+			const result = getVideosFromDom(videos, null);
 			expect(result.length).toBe(2);
 			for (let video of result) {
 				expect(video instanceof Video).toBeTruthy();

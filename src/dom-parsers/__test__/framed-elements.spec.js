@@ -33,7 +33,7 @@ describe ('DOM Parsers: Parse Framed Elements', () => {
 			</span>
 		`);
 
-		const json = parseFramedElement(frame);
+		const json = parseFramedElement(frame, null);
 
 		expect(json).toEqual({
 			itemprop: 'nti-data-markupdisabled',
@@ -74,7 +74,7 @@ describe ('DOM Parsers: Parse Framed Elements', () => {
 			</span>
 		`);
 
-		const json = parseFramedElement(frame);
+		const json = parseFramedElement(frame, null);
 
 		expect(json.markable).toBe(true);
 		expect(json.item.markable).toBe(true);
@@ -108,7 +108,7 @@ describe ('DOM Parsers: Parse Framed Elements', () => {
 			</span>
 		`);
 
-		const json = parseFramedElement(frame);
+		const json = parseFramedElement(frame, null);
 
 		expect(json.item).toEqual({markable: false});
 	});
@@ -137,7 +137,7 @@ describe ('DOM Parsers: Parse Framed Elements', () => {
 			</span>
 		`);
 
-		const json = parseFramedElement(frame);
+		const json = parseFramedElement(frame, null);
 
 		expect(json.item instanceof Video).toBeTruthy();
 	});

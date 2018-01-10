@@ -2,7 +2,7 @@ import parseDomObject from './object';
 import {getImagesFromDom} from './image';
 import {getVideosFromDom} from './video';
 
-export default function parseFramedElement (el) {
+export default function parseFramedElement (el, service) {
 	//This should always be a <span><img/></span> construct:
 	// <span itemprop="nti-data-markup(enabled|disabled)">
 	// 	<img crossorigin="anonymous"
@@ -22,8 +22,8 @@ export default function parseFramedElement (el) {
 	let {itemprop} = data;
 
 	data.item = [
-		getImagesFromDom(el),
-		getVideosFromDom(el)
+		getImagesFromDom(el, service),
+		getVideosFromDom(el, service)
 	].reduce(flat, null) || {};
 
 	if (!data.type) {

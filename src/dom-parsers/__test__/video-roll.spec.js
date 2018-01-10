@@ -61,7 +61,7 @@ describe ('DOM Parsers: Parse Video Roll Elements', () => {
 			</object>
 		`);
 
-		const json = parseVideoRoll(roll);
+		const json = parseVideoRoll(roll, null);
 		//force the value to primitve objects...
 		const raw = JSON.parse(JSON.stringify(json));
 
