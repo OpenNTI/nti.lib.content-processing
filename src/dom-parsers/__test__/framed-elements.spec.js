@@ -54,7 +54,8 @@ describe ('DOM Parsers: Parse Framed Elements', () => {
 			},
 			type: 'nti-data-markupdisabled',
 			markable: false,
-			isSlide: false
+			isSlide: false,
+			parentType: null
 		});
 	});
 
