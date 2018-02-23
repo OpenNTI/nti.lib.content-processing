@@ -21,6 +21,8 @@ export default function parseFramedElement (el, service) {
 
 	let {itemprop} = data;
 
+	const parentType = el.parentNode && el.parentNode.getAttribute('itemprop');
+
 	data.item = [
 		getImagesFromDom(el, service),
 		getVideosFromDom(el, service)
@@ -33,6 +35,7 @@ export default function parseFramedElement (el, service) {
 	data.markable =
 	data.item.markable = /nti-data-markupenabled/i.test(itemprop);
 	data.isSlide = /slide/i.test(data.type);
+	data.parentType = parentType;
 
 	return data;
 }
