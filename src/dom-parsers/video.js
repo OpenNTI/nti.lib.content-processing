@@ -7,9 +7,11 @@ const SOURCE_QS = 'object[type$=videosource]';
 const VIDEO_QS = 'object.naqvideo, object.ntivideo';
 
 export function fixType (o) {
+	o.Class = o.Class || o.class;
 	o.MimeType = o.MimeType || o.type;
 	o.NTIID = o.ntiid || (o.dataset || {}).ntiid;
 	delete o.children;
+	delete o.class;
 	// delete o.ntiid;
 
 	for (let key of ['height', 'width']) {
