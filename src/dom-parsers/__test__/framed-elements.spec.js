@@ -1,5 +1,5 @@
 /* eslint-env jest */
-import {getModel} from 'nti-lib-interfaces';
+import {getModel} from '@nti/lib-interfaces';
 
 import parseFramedElement from '../framed-elements';
 

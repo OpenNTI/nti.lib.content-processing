@@ -1,4 +1,4 @@
-import {Models} from 'nti-lib-interfaces';
+import {Models} from '@nti/lib-interfaces';
 
 import parseDomObject from './object';
 

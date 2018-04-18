@@ -1,5 +1,5 @@
 {
-  "name": "nti-lib-content-processing",
+  "name": "@nti/lib-content-processing",
   "version": "1.8.0-alpha",
   "author": "nextthought",
   "license": "UNLICENSED",
@@ -27,10 +27,10 @@
     "registry": "https://npm.nextthought.com"
   },
   "dependencies": {
-    "nti-lib-dom": "^1.0.0",
-    "nti-lib-interfaces": "^1.64.0",
-    "nti-util-logger": "^1.0.0",
-    "nti-web-client": "^1.0.0",
+    "@nti/lib-dom": "^1.0.0",
+    "@nti/lib-interfaces": "^1.64.0",
+    "@nti/util-logger": "^1.0.0",
+    "@nti/web-client": "^1.0.0",
     "uuid": "^3.0.1"
   },
   "devDependencies": {

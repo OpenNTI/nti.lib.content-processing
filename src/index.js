@@ -1,5 +1,5 @@
-import {getService} from 'nti-web-client';
-import {replaceNode, parent} from 'nti-lib-dom';
+import {getService} from '@nti/web-client';
+import {replaceNode, parent} from '@nti/lib-dom';
 import uuid from 'uuid';
 
 import DEFAULT_STRATEGIES from './dom-parsers';
