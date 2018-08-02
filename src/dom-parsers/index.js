@@ -3,6 +3,7 @@ import parseFramedElement from './framed-elements';
 import parseImageRoll from './image-roll';
 import parseVideoRoll from './video-roll';
 import parseVideo from './video';
+import parseRealPageNumber from './realpage-number';
 
 //Widget Selectors =to=> Strategies (parsers)
 export default {
@@ -26,7 +27,9 @@ export default {
 
 	'object[type*=embeded\\2e widget]': parseDomObject,
 
-	'object[type*=embededtopic]':parseDomObject,
+	'object[type*=embededtopic]': parseDomObject,
 
-	'[itemprop*=nti-data-markup],[itemprop~=nti-slide-video]': parseFramedElement
+	'[itemprop*=nti-data-markup],[itemprop~=nti-slide-video]': parseFramedElement,
+
+	'realpagenumber': parseRealPageNumber
 };
