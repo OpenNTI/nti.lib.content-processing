@@ -69,6 +69,7 @@ describe ('DOM Parsers: Parse Video Elements', () => {
 					source: '-no2o7TeHNA',
 					height: 360,
 					width: 640,
+					meta: {},
 					poster: '//img.youtube.com/vi/-no2o7TeHNA/0.jpg',
 					thumbnail: '//img.youtube.com/vi/-no2o7TeHNA/1.jpg'
 				}

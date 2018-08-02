@@ -100,6 +100,7 @@ describe ('DOM Parsers: Parse Video Roll Elements', () => {
 							source: '-no2o7TeHNA',
 							height: 360,
 							width: 640,
+							meta: {},
 							poster: '//img.youtube.com/vi/-no2o7TeHNA/0.jpg',
 							thumbnail: '//img.youtube.com/vi/-no2o7TeHNA/1.jpg'
 						}
@@ -126,6 +127,7 @@ describe ('DOM Parsers: Parse Video Roll Elements', () => {
 							source: 'mtahHh-Umrk',
 							height: 360,
 							width: 640,
+							meta: {},
 							poster: '//img.youtube.com/vi/mtahHh-Umrk/0.jpg',
 							thumbnail: '//img.youtube.com/vi/mtahHh-Umrk/1.jpg'
 						}
