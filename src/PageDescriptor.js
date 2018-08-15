@@ -12,11 +12,13 @@ export default class PageDescriptor {
 			[UserData]: data.userDataStore,
 
 			content: {
-				raw: data.content,
+				raw: data.contentRaw,
+				processed: data.content,
 				parsed: data.body
 			}
 		});
 
+		delete this.contentRaw;
 		delete this.body;
 		delete this.userDataStore;
 	}

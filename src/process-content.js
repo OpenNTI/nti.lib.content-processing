@@ -41,6 +41,7 @@ export async function processContent (packet, strategies = DEFAULT_STRATEGIES) {
 
 	return {
 		...packet,
+		contentRaw: packet.content,
 		content: body.innerHTML,
 		body: bodyParts,
 		styles: styles,
