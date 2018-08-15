@@ -9,7 +9,7 @@ const WIDGET_MARKER_REGEX = /<!--(?:[^\]>]*)(nti:widget-marker\[(?:[^\]>]+)\])(?
 
 const DOCUMENT_NODE = 9;// Node.DOCUMENT_NODE
 
-const indexArrayByKey = (array, key) => array.reduce((a, i) => (a[i[key]] = i, a), {});
+const arrayToObjectByKey = (array, key) => array.reduce((a, i) => (a[i[key]] = i, a), {});
 
 /**
  * Take HTML content and parse it into parts that we can render widgets into it.
@@ -24,14 +24,31 @@ export async function processContent (packet, strategies = DEFAULT_STRATEGIES) {
 	const service = await getService();
 	const doc = await parseHTML(packet.content);
 
-	const elementFactory = doc.nodeType === DOCUMENT_NODE ? doc : document;
 	const body = doc.querySelector('body');
 	const styles = Array.from(doc.querySelectorAll('link[rel=stylesheet]'))
 		.map(i=>i.getAttribute('href'));
 
-	const widgets = indexArrayByKey(parseWidgets(strategies, doc, elementFactory, service), 'guid');
+	const {widgets, parts} = buildContentBody(doc, service, strategies);
 
-	let bodyParts = body.innerHTML.split(WIDGET_MARKER_REGEX).map(part => {
+	return {
+		...packet,
+		contentRaw: packet.content,
+		content: body.innerHTML,
+		body: parts,
+		styles,
+		widgets
+	};
+}
+
+
+
+export function buildContentBody (doc, service, strategies = DEFAULT_STRATEGIES) {
+	const elementFactory = doc.nodeType === DOCUMENT_NODE ? doc : document;
+	const body = doc.querySelector('body');
+
+	const widgets = arrayToObjectByKey(parseWidgets(strategies, doc, elementFactory, service), 'guid');
+
+	const parts = body.innerHTML.split(WIDGET_MARKER_REGEX).map(part => {
 		let m = part.match(MARKER_REGEX);
 		if (m && m[1]) {
 			return widgets[m[1]];
@@ -40,11 +57,7 @@ export async function processContent (packet, strategies = DEFAULT_STRATEGIES) {
 	});
 
 	return {
-		...packet,
-		contentRaw: packet.content,
-		content: body.innerHTML,
-		body: bodyParts,
-		styles: styles,
-		widgets: widgets
+		widgets,
+		parts
 	};
 }
