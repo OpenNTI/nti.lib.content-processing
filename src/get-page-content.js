@@ -1,12 +1,31 @@
+import LRU from 'lru-cache';
+
 import {processContent} from './process-content';
 
+const cache = LRU({max: 100, maxAge: 3600000 /*1 hour*/});
+
 export function getPageContent (pageInfo) {
-	return pageInfo.getContent()
+	const key = pageInfo.getLink && pageInfo.getLink('content');
+
+	const fetch = () => pageInfo.getContent()
 		.then(content => ({pageInfo, content}))
 		//get the html and split out some resource references to fetch.
 		.then(processContent)
 		//load css
 		.then(fetchResources);
+
+
+	if (!key) {
+		return fetch();
+	}
+
+	let promise = cache.get(key);
+
+	if (!promise) {
+		cache.set(key, promise = fetch());
+	}
+
+	return promise;
 }
 
 
