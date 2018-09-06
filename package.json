@@ -5,8 +5,10 @@
   "license": "UNLICENSED",
   "description": "Process NTI content (controlled HTML)",
   "main": "lib/index.js",
+  "module": "src/index.js",
   "files": [
-    "lib"
+    "lib",
+    "src"
   ],
   "testEnvironment": "jsdom",
   "scripts": {
@@ -36,6 +38,6 @@
     "uuid": "^3.0.1"
   },
   "devDependencies": {
-    "@nti/lib-scripts": "^1.16.0"
+    "@nti/lib-scripts": "^2.0.0"
   }
 }
