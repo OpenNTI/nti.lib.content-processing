@@ -2,7 +2,7 @@ import LRU from 'lru-cache';
 
 import {processContent} from './process-content';
 
-const cache = LRU({max: 100, maxAge: 30000 /*60 seconds*/});
+const cache = new LRU({max: 100, maxAge: 30000 /*60 seconds*/});
 
 export function getPageContent (pageInfo) {
 	const key = pageInfo.getLink && pageInfo.getLink('content');
