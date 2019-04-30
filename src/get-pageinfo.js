@@ -9,9 +9,7 @@ export function getPageInfo (ntiid, context, extras) {
 	return getService()
 		.then(service => {
 			return service.getPageInfo(ntiid, {parent: context, params})
-				.catch(error => error.statusCode === 405
-					? generatePageInfoFrom(ntiid, service, context, extras)
-					: Promise.reject(error));
+				.catch(() => generatePageInfoFrom(ntiid, service, context, extras));
 		});
 }
 
