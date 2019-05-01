@@ -14,24 +14,42 @@ export function getPageInfo (ntiid, context, extras) {
 }
 
 
-function generatePageInfoFrom (ntiid, service, context, extras) {
+async function generatePageInfoFrom (ntiid, service, context, extras) {
+	const object = await getObject(ntiid, service, context, extras);
+	const targetPageInfo = await getTargetPageInfo(object, service, context, extras);
+
+
+	if (targetPageInfo) { return targetPageInfo; }
+
+	const generator = GENERATORS[object.MimeType];
+
+	if (!generator) {
+		throw new Error('405: Method Not Allowed');
+	}
+
+	return generator(service, context, object);
+}
+
+async function getObject (ntiid, service, context, extras) {
 	const {assessment} = extras || {};
+
+	if (assessment && assessment.getID() === ntiid) { return assessment; }
+
 	const params = context ? {course: context.getID()} : void 0;
 
-
-	const resolve = (assessment && assessment.getID() === ntiid)
-		? Promise.resolve(assessment)
-		: service.getObject(ntiid, {parent: context, params});
+	return service.getObject(ntiid, {parent: context, params});
+}
 
 
-	return resolve
-		.then(object => {
-			const generator = GENERATORS[object.MimeType];
-			if (!generator) {
-				//continue the error
-				return Promise.reject('405: Method Not Allowed');
-			}
+async function getTargetPageInfo (object, service, context) {
+	try {
+		const {target} = object;
+		const params = context ? {course: context.getID()} : void 0;
 
-			return generator(service, context, object);
-		});
+		if (!target) { return null; }
+
+		return await service.getPageInfo(target, {parent: context, params});
+	} catch (e) {
+		return null;
+	}
 }
