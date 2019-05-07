@@ -3,8 +3,8 @@ import {getAppUsername} from '@nti/web-client';
 
 const PageInfo = getModel('pageinfo');
 
-function getParams (relatedWork) {
-	const params = {
+export function getParams (relatedWork) {
+	return {
 		ntiid: relatedWork.NTIID,
 		href: relatedWork.href,
 		icon: relatedWork.icon,
@@ -16,7 +16,9 @@ function getParams (relatedWork) {
 		targetNTIID: relatedWork.target,
 		targetMimeType: relatedWork.targetMimeType
 	};
+}
 
+export function getParamsHTML (params) {
 	let content = '';
 
 	for (const [key, value] of Object.entries(params)) {
@@ -28,15 +30,17 @@ function getParams (relatedWork) {
 	return content;
 }
 
-function getObjectHTML (relatedWork) {
+export function getObjectHTML (relatedWork, params) {
+	const paramsHTML = getParamsHTML(params || getParams(relatedWork));
+
 	return `
 		<object class="nticard" type="application/vnd.nextthought.nticard" data-ntiid="${relatedWork.NTIID}" data-href="${relatedWork.href}">
-			${getParams(relatedWork)}
+			${paramsHTML}
 		</object>
 	`;
 }
 
-export default function generateRelatedWorkPage (service, context, relatedWork) {
+export function buildPageInfo (service, context, relatedWork, innerContent) {
 	const {NTIID} = relatedWork;
 	const content = `
 		<head>
@@ -44,7 +48,7 @@ export default function generateRelatedWorkPage (service, context, relatedWork) 
 		</head>
 		<body>
 			<div class="page-contents no-padding">
-				${getObjectHTML(relatedWork)}
+				${innerContent}
 			</div>
 		</body>
 	`;
@@ -70,4 +74,8 @@ export default function generateRelatedWorkPage (service, context, relatedWork) 
 	pi.getContent = () => Promise.resolve(content);
 
 	return pi;
+}
+
+export default function generateRelatedWorkPage (service, context, relatedWork) {
+	return buildPageInfo(service, context, relatedWork, getObjectHTML(relatedWork));
 }
