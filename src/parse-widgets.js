@@ -41,7 +41,7 @@ export function parseWidgets (strategies, doc, elementFactory, service) {
 				let result = strategies[selector](el, service) || {element: el};
 
 				if (!id) {
-					el.setAttribute('id', (id = uuid()));
+					el.setAttribute('id', (id = uuid.v4()));
 				}
 
 				replaceNode(el, makeMarker(id));
