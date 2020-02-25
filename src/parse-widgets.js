@@ -1,5 +1,5 @@
 import {replaceNode, parent} from '@nti/lib-dom';
-import uuid from 'uuid';
+import {v4 as uuid} from 'uuid';
 
 
 /**
@@ -41,7 +41,7 @@ export function parseWidgets (strategies, doc, elementFactory, service) {
 				let result = strategies[selector](el, service) || {element: el};
 
 				if (!id) {
-					el.setAttribute('id', (id = uuid.v4()));
+					el.setAttribute('id', (id = uuid()));
 				}
 
 				replaceNode(el, makeMarker(id));
