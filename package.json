@@ -35,7 +35,7 @@
     "@nti/util-logger": "^1.0.0",
     "@nti/web-client": "^1.0.0",
     "lru-cache": "^5.1.1",
-    "uuid": "^3.0.1"
+    "uuid": "^7.0.1"
   },
   "devDependencies": {
     "@nti/lib-scripts": "^2.0.0"
