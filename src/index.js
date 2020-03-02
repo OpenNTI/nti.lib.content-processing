@@ -10,4 +10,4 @@ export * from './parse-html';
 export * from './parse-widgets';
 export * from './process-content';
 
-export PageDescriptor from './PageDescriptor';
+export { default as PageDescriptor } from './PageDescriptor';
