@@ -33,7 +33,6 @@ async function generatePageInfoFrom (ntiid, service, context, extras) {
 
 	if (targetPageInfo) { return targetPageInfo; }
 
-	debugger;//eslint-disable-line
 	const generator = RegisteredGenerators[object.MimeType] || GENERATORS[object.MimeType];
 
 	if (!generator) {
