@@ -2,6 +2,18 @@ import {getService} from '@nti/web-client';
 
 import GENERATORS from './page-generators';
 
+const RegisteredGenerators = {};
+
+export function registerGenerator (type, generator) {
+	if (!Array.isArray(type)) {
+		type = [type];
+	}
+
+	for (let t of type) {
+		RegisteredGenerators[t] = generator;
+	}
+}
+
 
 export function getPageInfo (ntiid, context, extras) {
 	//Temp fix...
@@ -21,7 +33,8 @@ async function generatePageInfoFrom (ntiid, service, context, extras) {
 
 	if (targetPageInfo) { return targetPageInfo; }
 
-	const generator = GENERATORS[object.MimeType];
+	debugger;//eslint-disable-line
+	const generator = RegisteredGenerators[object.MimeType] || GENERATORS[object.MimeType];
 
 	if (!generator) {
 		throw new Error('405: Method Not Allowed');
