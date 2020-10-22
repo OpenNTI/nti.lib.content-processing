@@ -25,6 +25,23 @@ export function getPageInfo (ntiid, context, extras) {
 		});
 }
 
+export async function getGeneratedPageInfo (obj, context, extras) {
+	const service = await getService();
+	const object = typeof obj === 'string' ? await getObject(obj, service, context, extras) : obj;
+
+	const targetPageInfo = await getTargetPageInfo(object, service, context, extras);
+
+	if (targetPageInfo) { return targetPageInfo; }
+
+	const generator = RegisteredGenerators[object.MimeType] || GENERATORS[object.MimeType];
+
+	if (!generator) {
+		throw new Error('405: Method Not Allowed');
+	}
+
+	return generator(service, context, object);
+}
+
 
 async function generatePageInfoFrom (ntiid, service, context, extras) {
 	const object = await getObject(ntiid, service, context, extras);
