@@ -1,3 +1,5 @@
+import {String as StringUtils} from '@nti/lib-commons';
+
 import {buildPageInfoForContents} from './AssessmentPageGenerator';
 
 const EMBED_TYPE = 'application/vnd.nextthought.app.embededtopic';
@@ -7,7 +9,7 @@ function getBaseContents (assignment) {
 	const contents = [];
 
 	if (title) {
-		contents.push(`<div class="chapter title">${title}</div>`);
+		contents.push(`<div class="chapter title">${StringUtils.escapeHTML(title)}</div>`);
 	}
 
 	if (content) {
