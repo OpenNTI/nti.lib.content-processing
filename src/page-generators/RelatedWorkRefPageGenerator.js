@@ -1,7 +1,9 @@
+import {String as StringUtils} from '@nti/lib-commons';
 import {getModel} from '@nti/lib-interfaces';
 import {getAppUsername} from '@nti/web-client';
 
 const PageInfo = getModel('pageinfo');
+const {escapeHTML} = StringUtils;
 
 export function getParams (relatedWork) {
 	return {
@@ -23,7 +25,7 @@ export function getParamsHTML (params) {
 
 	for (const [key, value] of Object.entries(params)) {
 		if (value) {
-			content += `<param name="${key}" value="${value}" />\n`;
+			content += `<param name="${escapeHTML(key)}" value="${escapeHTML(value)}" />\n`;
 		}
 	}
 
@@ -44,7 +46,7 @@ export function buildPageInfo (service, context, relatedWork, innerContent) {
 	const {NTIID} = relatedWork;
 	const content = `
 		<head>
-			<title>${relatedWork.label}</title>
+			<title>${escapeHTML(relatedWork.label)}</title>
 		</head>
 		<body>
 			<div class="page-contents no-padding">
