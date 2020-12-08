@@ -1,6 +1,8 @@
 import {getModel} from '@nti/lib-interfaces';
 import {String as StringUtils} from '@nti/lib-commons';
 
+
+const {escapeHTML} = StringUtils;
 const PageInfo = getModel('pageinfo');
 
 export function buildPageInfoForContents (service, context, assessment, contents) {
@@ -17,7 +19,7 @@ export function buildPageInfoForContents (service, context, assessment, contents
 
 	const content = `
 		<head>
-			<title>${assessment.title}</title>
+			<title>${escapeHTML(assessment.title)}</title>
 		</head>
 		<body>
 			<div class="page-contents">
@@ -54,7 +56,7 @@ function getContentsForAssessment (assessment) {
 	const contents = [];
 
 	if (title) {
-		contents.push(`<div class="chapter title">${StringUtils.escapeHTML(title)}</div>`);
+		contents.push(`<div class="chapter title">${escapeHTML(title)}</div>`);
 	}
 
 	if (content) {
