@@ -11,7 +11,7 @@ import {v4 as uuid} from 'uuid';
  *
  * @param {Node} elementFactory		A Dom object that has an implementation for 'createComment'.
  * @param {ServiceDocument} service	The Service document for your session.
- * @returns {object[]} An array of objects representing widgets.
+ * @returns {Object[]} An array of objects representing widgets.
  */
 export function parseWidgets (strategies, doc, elementFactory, service) {
 

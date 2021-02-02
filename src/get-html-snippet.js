@@ -3,7 +3,7 @@
  *
  * @param {string} html content to reduce.
  * @param {number} max Max characters to allow.
- * @return {string} the snippet html.
+ * @returns {string} the snippet html.
  */
 export function getHTMLSnippet (html, max) {
 	const markup = /(<[^>]+>)/;

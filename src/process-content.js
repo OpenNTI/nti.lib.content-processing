@@ -18,7 +18,7 @@ const arrayToObjectByKey = (array, key) => array.reduce((a, i) => (a[i[key]] = i
  * @param {Object} strategies An object where the keys are the CSS selectors for widgets, and
  *                            the values are functions to transform that selected element into
  *                            an Object used to render the Widget.
- * @returns {object} A packet of data, content, body, styles and widgets. MAY return a promise that fulfills with said object.
+ * @returns {Object} A packet of data, content, body, styles and widgets. MAY return a promise that fulfills with said object.
  */
 export async function processContent (packet, strategies = DEFAULT_STRATEGIES) {
 	const service = await getService();

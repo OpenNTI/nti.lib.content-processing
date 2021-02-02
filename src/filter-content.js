@@ -3,7 +3,7 @@
  *
  * @param {string} html The content to filter
  *
- * @return {string} Filtered HTML
+ * @returns {string} Filtered HTML
  */
 export function filterContent (html) {
 

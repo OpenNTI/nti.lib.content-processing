@@ -13,7 +13,7 @@ const logger = Logger.get('lib:content-processing:load');
 /**
  *	@param {string} ntiid Content Page - NTIID
  *	@param {Package|Bundle|Instance} context - An instance of a Content/Course model
- *	@param {object} [extra] - props, or extra config to pass along
+ *	@param {Object} [extra] - props, or extra config to pass along
  *	@returns {void}
  */
 export function loadPageDescriptor (ntiid, context, extra) {
