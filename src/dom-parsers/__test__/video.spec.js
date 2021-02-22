@@ -1,24 +1,24 @@
 /* eslint-env jest */
-import {getModel} from '@nti/lib-interfaces';
+import { getModel } from '@nti/lib-interfaces';
 
-import parseVideo, {getVideosFromDom} from '../video';
+import parseVideo, { getVideosFromDom } from '../video';
 
-import {makeDOM} from './tools';
+import { makeDOM } from './tools';
 
 const Video = getModel('video');
 
-describe ('DOM Parsers: Parse Video Elements', () => {
+describe('DOM Parsers: Parse Video Elements', () => {
 	const originalConfig = global.$AppConfig;
 
-	afterEach(() => global.$AppConfig = originalConfig);
+	afterEach(() => (global.$AppConfig = originalConfig));
 
 	beforeEach(() => {
 		global.$AppConfig = {
-			nodeInterface: {}
+			nodeInterface: {},
 		};
 	});
 
-	test ('parseVideo should return a valid object', () => {
+	test('parseVideo should return a valid object', () => {
 		const vid = makeDOM(`
 			<object class="ntivideo"
 				data-ntiid="tag:nextthought.com,2011-10:LitWorld-NTIVideo-LitClub_Celebrations.ntivideo.video_Hello_Song_Annie_Foley"
@@ -52,7 +52,8 @@ describe ('DOM Parsers: Parse Video Elements', () => {
 			NO_TRANSCRIPT_LANG: 'No Transcript for the requested language.',
 			EXISTING_TRANSCRIPT: 'A Transcript already exists',
 			MimeType: 'application/vnd.nextthought.ntivideo',
-			NTIID: 'tag:nextthought.com,2011-10:LitWorld-NTIVideo-LitClub_Celebrations.ntivideo.video_Hello_Song_Annie_Foley',
+			NTIID:
+				'tag:nextthought.com,2011-10:LitWorld-NTIVideo-LitClub_Celebrations.ntivideo.video_Hello_Song_Annie_Foley',
 			itemprop: 'presentation-video',
 			title: 'Hello Song Annie Foley',
 			sources: [
@@ -61,7 +62,7 @@ describe ('DOM Parsers: Parse Video Elements', () => {
 					dataset: {
 						height: '360',
 						priority: '0',
-						width: '640'
+						width: '640',
 					},
 					type: 'application/vnd.nextthought.videosource',
 					title: 'undefined',
@@ -71,15 +72,14 @@ describe ('DOM Parsers: Parse Video Elements', () => {
 					width: 640,
 					meta: {},
 					poster: '//img.youtube.com/vi/-no2o7TeHNA/0.jpg',
-					thumbnail: '//img.youtube.com/vi/-no2o7TeHNA/1.jpg'
-				}
-			]
+					thumbnail: '//img.youtube.com/vi/-no2o7TeHNA/1.jpg',
+				},
+			],
 		});
 	});
 
-
-	describe ('getVideosFromDom', () => {
-		test ('should find videos', () => {
+	describe('getVideosFromDom', () => {
+		test('should find videos', () => {
 			const videos = makeDOM(`
 				<span>
 					<object class="ntivideo"

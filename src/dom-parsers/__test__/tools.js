@@ -1,4 +1,4 @@
-export function makeDOM (html) {
+export function makeDOM(html) {
 	let d = document.createElement('div');
 	d.innerHTML = html.trim();
 	if (d.childNodes.length > 1) {

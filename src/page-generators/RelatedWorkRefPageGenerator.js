@@ -1,11 +1,11 @@
-import {String as StringUtils} from '@nti/lib-commons';
-import {getModel} from '@nti/lib-interfaces';
-import {getAppUsername} from '@nti/web-client';
+import { String as StringUtils } from '@nti/lib-commons';
+import { getModel } from '@nti/lib-interfaces';
+import { getAppUsername } from '@nti/web-client';
 
 const PageInfo = getModel('pageinfo');
-const {escapeHTML} = StringUtils;
+const { escapeHTML } = StringUtils;
 
-export function getParams (relatedWork) {
+export function getParams(relatedWork) {
 	return {
 		ntiid: relatedWork.NTIID,
 		href: relatedWork.href,
@@ -16,23 +16,25 @@ export function getParams (relatedWork) {
 		byline: relatedWork.byline,
 		creator: relatedWork.byline,
 		targetNTIID: relatedWork.target,
-		targetMimeType: relatedWork.targetMimeType
+		targetMimeType: relatedWork.targetMimeType,
 	};
 }
 
-export function getParamsHTML (params) {
+export function getParamsHTML(params) {
 	let content = '';
 
 	for (const [key, value] of Object.entries(params)) {
 		if (value) {
-			content += `<param name="${escapeHTML(key)}" value="${escapeHTML(value)}" />\n`;
+			content += `<param name="${escapeHTML(key)}" value="${escapeHTML(
+				value
+			)}" />\n`;
 		}
 	}
 
 	return content;
 }
 
-export function getObjectHTML (relatedWork, params) {
+export function getObjectHTML(relatedWork, params) {
 	const paramsHTML = getParamsHTML(params || getParams(relatedWork));
 
 	return `
@@ -42,8 +44,8 @@ export function getObjectHTML (relatedWork, params) {
 	`;
 }
 
-export function buildPageInfo (service, context, relatedWork, innerContent) {
-	const {NTIID} = relatedWork;
+export function buildPageInfo(service, context, relatedWork, innerContent) {
+	const { NTIID } = relatedWork;
 	const content = `
 		<head>
 			<title>${escapeHTML(relatedWork.label)}</title>
@@ -62,15 +64,21 @@ export function buildPageInfo (service, context, relatedWork, innerContent) {
 		Links: [
 			{
 				Class: 'Link',
-				href: `/dataserver2/users/${encodeURIComponent(getAppUsername())}/Pages(${encodeURIComponent(NTIID)})/UserGeneratedData`,
-				rel: 'UserGeneratedData'
+				href: `/dataserver2/users/${encodeURIComponent(
+					getAppUsername()
+				)}/Pages(${encodeURIComponent(NTIID)})/UserGeneratedData`,
+				rel: 'UserGeneratedData',
 			},
 			{
 				Class: 'Link',
-				href: `/dataserver2/users/${encodeURIComponent(getAppUsername())}/Pages(${encodeURIComponent(NTIID)})/RelevantContainedUserGeneratedData`,
-				rel: 'RelevantContainedUserGeneratedData'
-			}
-		]
+				href: `/dataserver2/users/${encodeURIComponent(
+					getAppUsername()
+				)}/Pages(${encodeURIComponent(
+					NTIID
+				)})/RelevantContainedUserGeneratedData`,
+				rel: 'RelevantContainedUserGeneratedData',
+			},
+		],
 	});
 
 	pi.getContent = () => Promise.resolve(content);
@@ -78,6 +86,11 @@ export function buildPageInfo (service, context, relatedWork, innerContent) {
 	return pi;
 }
 
-export default function generateRelatedWorkPage (service, context, relatedWork) {
-	return buildPageInfo(service, context, relatedWork, getObjectHTML(relatedWork));
+export default function generateRelatedWorkPage(service, context, relatedWork) {
+	return buildPageInfo(
+		service,
+		context,
+		relatedWork,
+		getObjectHTML(relatedWork)
+	);
 }

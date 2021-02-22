@@ -1,6 +1,14 @@
-import {buildPageInfo, getObjectHTML, getParams} from './RelatedWorkRefPageGenerator';
+import {
+	buildPageInfo,
+	getObjectHTML,
+	getParams,
+} from './RelatedWorkRefPageGenerator';
 
-export default function generateExternToolAssetPage (service, context, externalTool) {
+export default function generateExternToolAssetPage(
+	service,
+	context,
+	externalTool
+) {
 	const params = getParams(externalTool);
 	const href = externalTool.getLink('Launch');
 

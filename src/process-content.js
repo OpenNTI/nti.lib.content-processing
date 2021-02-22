@@ -1,15 +1,16 @@
-import {getService} from '@nti/web-client';
+import { getService } from '@nti/web-client';
 
 import DEFAULT_STRATEGIES from './dom-parsers';
-import {parseHTML} from './parse-html';
-import {parseWidgets} from './parse-widgets';
+import { parseHTML } from './parse-html';
+import { parseWidgets } from './parse-widgets';
 
 const MARKER_REGEX = /nti:widget-marker\[([^\]>]+)\]/i;
-const WIDGET_MARKER_REGEX = /<!--(?:[^\]>]*)(nti:widget-marker\[(?:[^\]>]+)\])(?:[^\]>]*)-->/ig;
+const WIDGET_MARKER_REGEX = /<!--(?:[^\]>]*)(nti:widget-marker\[(?:[^\]>]+)\])(?:[^\]>]*)-->/gi;
 
-const DOCUMENT_NODE = 9;// Node.DOCUMENT_NODE
+const DOCUMENT_NODE = 9; // Node.DOCUMENT_NODE
 
-const arrayToObjectByKey = (array, key) => array.reduce((a, i) => (a[i[key]] = i, a), {});
+const arrayToObjectByKey = (array, key) =>
+	array.reduce((a, i) => ((a[i[key]] = i), a), {});
 
 /**
  * Take HTML content and parse it into parts that we can render widgets into it.
@@ -20,15 +21,16 @@ const arrayToObjectByKey = (array, key) => array.reduce((a, i) => (a[i[key]] = i
  *                            an Object used to render the Widget.
  * @returns {Object} A packet of data, content, body, styles and widgets. MAY return a promise that fulfills with said object.
  */
-export async function processContent (packet, strategies = DEFAULT_STRATEGIES) {
+export async function processContent(packet, strategies = DEFAULT_STRATEGIES) {
 	const service = await getService();
 	const doc = await parseHTML(packet.content);
 
 	const body = doc.querySelector('body');
-	const styles = Array.from(doc.querySelectorAll('link[rel=stylesheet]'))
-		.map(i=>i.getAttribute('href'));
+	const styles = Array.from(
+		doc.querySelectorAll('link[rel=stylesheet]')
+	).map(i => i.getAttribute('href'));
 
-	const {widgets, parts} = buildContentBody(doc, service, strategies);
+	const { widgets, parts } = buildContentBody(doc, service, strategies);
 
 	return {
 		...packet,
@@ -36,17 +38,22 @@ export async function processContent (packet, strategies = DEFAULT_STRATEGIES) {
 		content: body.innerHTML,
 		body: parts,
 		styles,
-		widgets
+		widgets,
 	};
 }
 
-
-
-export function buildContentBody (doc, service, strategies = DEFAULT_STRATEGIES) {
+export function buildContentBody(
+	doc,
+	service,
+	strategies = DEFAULT_STRATEGIES
+) {
 	const elementFactory = doc.nodeType === DOCUMENT_NODE ? doc : document;
 	const body = doc.querySelector('body');
 
-	const widgets = arrayToObjectByKey(parseWidgets(strategies, doc, elementFactory, service), 'guid');
+	const widgets = arrayToObjectByKey(
+		parseWidgets(strategies, doc, elementFactory, service),
+		'guid'
+	);
 
 	const parts = body.innerHTML.split(WIDGET_MARKER_REGEX).map(part => {
 		let m = part.match(MARKER_REGEX);
@@ -58,6 +65,6 @@ export function buildContentBody (doc, service, strategies = DEFAULT_STRATEGIES)
 
 	return {
 		widgets,
-		parts
+		parts,
 	};
 }

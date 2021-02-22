@@ -1,20 +1,19 @@
-import {getContent} from './get-content';
+import { getContent } from './get-content';
 
-const PARSE_TIMEOUT = 30 * 1000;//30 seconds. (in milliseconds)
+const PARSE_TIMEOUT = 30 * 1000; //30 seconds. (in milliseconds)
 
 const isReady = doc => doc.readyState !== 'loading';
 const sleep = t => new Promise(x => setTimeout(x, t));
 
-
-export async function parseHTML (htmlString) {
+export async function parseHTML(htmlString) {
 	const html = getContent(htmlString);
-	const parser = (typeof DOMParser !== 'undefined') && new DOMParser();
+	const parser = typeof DOMParser !== 'undefined' && new DOMParser();
 
-	let doc = parser && (
-		parser.parseFromString(html, 'text/html')
+	let doc =
+		parser &&
+		parser.parseFromString(html, 'text/html');
 		// ||
 		// parser.parseFromString(html, 'text/xml')
-	);
 
 	if (!doc) {
 		doc = document.createElement('html');
@@ -30,7 +29,7 @@ export async function parseHTML (htmlString) {
 	while (!isReady(doc)) {
 		await sleep(100);
 
-		if ((Date.now() - start) > PARSE_TIMEOUT) {
+		if (Date.now() - start > PARSE_TIMEOUT) {
 			throw new Error('Parse Timeout');
 		}
 	}

@@ -1,8 +1,8 @@
 import parseDomObject from './object';
-import {getImagesFromDom} from './image';
-import {getVideosFromDom} from './video';
+import { getImagesFromDom } from './image';
+import { getVideosFromDom } from './video';
 
-export default function parseFramedElement (el, service) {
+export default function parseFramedElement(el, service) {
 	//This should always be a <span><img/></span> construct:
 	// <span itemprop="nti-data-markup(enabled|disabled)">
 	// 	<img crossorigin="anonymous"
@@ -19,21 +19,23 @@ export default function parseFramedElement (el, service) {
 
 	let data = parseDomObject(el);
 
-	let {itemprop} = data;
+	let { itemprop } = data;
 
 	const parentType = el.parentNode && el.parentNode.getAttribute('itemprop');
 
-	data.item = [
-		getImagesFromDom(el, service),
-		getVideosFromDom(el, service)
-	].reduce(flat, null) || {};
+	data.item =
+		[getImagesFromDom(el, service), getVideosFromDom(el, service)].reduce(
+			flat,
+			null
+		) || {};
 
 	if (!data.type) {
 		data.type = itemprop;
 	}
 
-	data.markable =
-	data.item.markable = /nti-data-markupenabled/i.test(itemprop);
+	data.markable = data.item.markable = /nti-data-markupenabled/i.test(
+		itemprop
+	);
 	data.isSlide = /slide/i.test(data.type);
 	data.parentType = parentType;
 

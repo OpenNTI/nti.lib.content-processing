@@ -1,10 +1,10 @@
-import {getService} from '@nti/web-client';
+import { getService } from '@nti/web-client';
 
 import GENERATORS from './page-generators';
 
 const RegisteredGenerators = {};
 
-export function registerGenerator (type, generator) {
+export function registerGenerator(type, generator) {
 	if (!Array.isArray(type)) {
 		type = [type];
 	}
@@ -14,26 +14,36 @@ export function registerGenerator (type, generator) {
 	}
 }
 
-
-export function getPageInfo (ntiid, context, extras) {
+export function getPageInfo(ntiid, context, extras) {
 	//Temp fix...
-	const params = context ? {course: context.getID()} : void 0;
-	return getService()
-		.then(service => {
-			return service.getPageInfo(ntiid, {parent: context, params})
-				.catch(() => generatePageInfoFrom(ntiid, service, context, extras));
-		});
+	const params = context ? { course: context.getID() } : void 0;
+	return getService().then(service => {
+		return service
+			.getPageInfo(ntiid, { parent: context, params })
+			.catch(() => generatePageInfoFrom(ntiid, service, context, extras));
+	});
 }
 
-export async function getGeneratedPageInfo (obj, context, extras) {
+export async function getGeneratedPageInfo(obj, context, extras) {
 	const service = await getService();
-	const object = typeof obj === 'string' ? await getObject(obj, service, context, extras) : obj;
+	const object =
+		typeof obj === 'string'
+			? await getObject(obj, service, context, extras)
+			: obj;
 
-	const targetPageInfo = await getTargetPageInfo(object, service, context, extras);
+	const targetPageInfo = await getTargetPageInfo(
+		object,
+		service,
+		context,
+		extras
+	);
 
-	if (targetPageInfo) { return targetPageInfo; }
+	if (targetPageInfo) {
+		return targetPageInfo;
+	}
 
-	const generator = RegisteredGenerators[object.MimeType] || GENERATORS[object.MimeType];
+	const generator =
+		RegisteredGenerators[object.MimeType] || GENERATORS[object.MimeType];
 
 	if (!generator) {
 		throw new Error('405: Method Not Allowed');
@@ -42,15 +52,21 @@ export async function getGeneratedPageInfo (obj, context, extras) {
 	return generator(service, context, object);
 }
 
-
-async function generatePageInfoFrom (ntiid, service, context, extras) {
+async function generatePageInfoFrom(ntiid, service, context, extras) {
 	const object = await getObject(ntiid, service, context, extras);
-	const targetPageInfo = await getTargetPageInfo(object, service, context, extras);
+	const targetPageInfo = await getTargetPageInfo(
+		object,
+		service,
+		context,
+		extras
+	);
 
+	if (targetPageInfo) {
+		return targetPageInfo;
+	}
 
-	if (targetPageInfo) { return targetPageInfo; }
-
-	const generator = RegisteredGenerators[object.MimeType] || GENERATORS[object.MimeType];
+	const generator =
+		RegisteredGenerators[object.MimeType] || GENERATORS[object.MimeType];
 
 	if (!generator) {
 		throw new Error('405: Method Not Allowed');
@@ -59,25 +75,28 @@ async function generatePageInfoFrom (ntiid, service, context, extras) {
 	return generator(service, context, object);
 }
 
-async function getObject (ntiid, service, context, extras) {
-	const {assessment} = extras || {};
+async function getObject(ntiid, service, context, extras) {
+	const { assessment } = extras || {};
 
-	if (assessment && assessment.getID() === ntiid) { return assessment; }
+	if (assessment && assessment.getID() === ntiid) {
+		return assessment;
+	}
 
-	const params = context ? {course: context.getID()} : void 0;
+	const params = context ? { course: context.getID() } : void 0;
 
-	return service.getObject(ntiid, {parent: context, params});
+	return service.getObject(ntiid, { parent: context, params });
 }
 
-
-async function getTargetPageInfo (object, service, context) {
+async function getTargetPageInfo(object, service, context) {
 	try {
-		const {target} = object;
-		const params = context ? {course: context.getID()} : void 0;
+		const { target } = object;
+		const params = context ? { course: context.getID() } : void 0;
 
-		if (!target) { return null; }
+		if (!target) {
+			return null;
+		}
 
-		return await service.getPageInfo(target, {parent: context, params});
+		return await service.getPageInfo(target, { parent: context, params });
 	} catch (e) {
 		return null;
 	}

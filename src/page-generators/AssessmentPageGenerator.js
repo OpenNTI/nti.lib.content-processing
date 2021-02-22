@@ -1,21 +1,28 @@
-import {getModel} from '@nti/lib-interfaces';
-import {String as StringUtils} from '@nti/lib-commons';
+import { getModel } from '@nti/lib-interfaces';
+import { String as StringUtils } from '@nti/lib-commons';
 
-
-const {escapeHTML} = StringUtils;
+const { escapeHTML } = StringUtils;
 const PageInfo = getModel('pageinfo');
 
-export function buildPageInfoForContents (service, context, assessment, contents) {
+export function buildPageInfoForContents(
+	service,
+	context,
+	assessment,
+	contents
+) {
 	const ntiid = assessment.getID();
 
 	const parent = assessment.parent('ContentPackageBundle');
 	const Bundle = parent && parent.ContentPackageBundle;
 	const Package = Bundle && Bundle.ContentPackages[0];
 	/*
-	* NTI-4705: Placeholder is there for courses that are newly created with no content packages.
-	* This allows for assignments to be opened in an empty course.
-	*/
-	const ContentPackageNTIID = Package && (!Package.isRenderable || Package.isRendered) ? Package.NTIID : 'placeholder';
+	 * NTI-4705: Placeholder is there for courses that are newly created with no content packages.
+	 * This allows for assignments to be opened in an empty course.
+	 */
+	const ContentPackageNTIID =
+		Package && (!Package.isRenderable || Package.isRendered)
+			? Package.NTIID
+			: 'placeholder';
 
 	const content = `
 		<head>
@@ -33,7 +40,7 @@ export function buildPageInfoForContents (service, context, assessment, contents
 	const pi = new PageInfo(service, context, {
 		ContentPackageNTIID,
 		ID: ntiid,
-		NTIID: ntiid
+		NTIID: ntiid,
 	});
 
 	pi.AssessmentItems = [assessment];
@@ -42,17 +49,15 @@ export function buildPageInfoForContents (service, context, assessment, contents
 	return pi;
 }
 
-
-export default function generate (service, context, assessment) {
+export default function generate(service, context, assessment) {
 	const contents = getContentsForAssessment(assessment);
 
 	return buildPageInfoForContents(service, context, assessment, contents);
 }
 
-
-function getContentsForAssessment (assessment) {
+function getContentsForAssessment(assessment) {
 	const questions = assessment ? assessment.getQuestions() : [];
-	const {title, content} = assessment;
+	const { title, content } = assessment;
 	const contents = [];
 
 	if (title) {
@@ -60,7 +65,9 @@ function getContentsForAssessment (assessment) {
 	}
 
 	if (content) {
-		contents.push(`<div class="sidebar assignment-description">${content}</div>`);
+		contents.push(
+			`<div class="sidebar assignment-description">${content}</div>`
+		);
 	}
 
 	for (let index = 0; index < questions.length; index++) {

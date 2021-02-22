@@ -1,20 +1,20 @@
 /* eslint-env jest */
 import parseVideoRoll from '../video-roll';
 
-import {makeDOM} from './tools';
+import { makeDOM } from './tools';
 
-describe ('DOM Parsers: Parse Video Roll Elements', () => {
+describe('DOM Parsers: Parse Video Roll Elements', () => {
 	const originalConfig = global.$AppConfig;
 
-	afterEach(() => global.$AppConfig = originalConfig);
+	afterEach(() => (global.$AppConfig = originalConfig));
 
 	beforeEach(() => {
 		global.$AppConfig = {
-			nodeInterface: {}
+			nodeInterface: {},
 		};
 	});
 
-	test ('parseVideoRoll should return a valid object', () => {
+	test('parseVideoRoll should return a valid object', () => {
 		const roll = makeDOM(`
 			<object data="tag:nextthought.com,2011-10:LitWorld-NTIVR-LitClub_Celebrations.ntivideoroll.1"
 				data-ntiid="tag:nextthought.com,2011-10:LitWorld-NTIVR-LitClub_Celebrations.ntivideoroll.1"
@@ -66,14 +66,18 @@ describe ('DOM Parsers: Parse Video Roll Elements', () => {
 		const raw = JSON.parse(JSON.stringify(json));
 
 		expect(raw).toEqual({
-			data: 'tag:nextthought.com,2011-10:LitWorld-NTIVR-LitClub_Celebrations.ntivideoroll.1',
+			data:
+				'tag:nextthought.com,2011-10:LitWorld-NTIVR-LitClub_Celebrations.ntivideoroll.1',
 			dataset: {
-				ntiid: 'tag:nextthought.com,2011-10:LitWorld-NTIVR-LitClub_Celebrations.ntivideoroll.1'
+				ntiid:
+					'tag:nextthought.com,2011-10:LitWorld-NTIVR-LitClub_Celebrations.ntivideoroll.1',
 			},
 			description: 'Watch examples of the Hello Song',
 			MimeType: 'application/vnd.nextthought.videoroll',
-			NTIID: 'tag:nextthought.com,2011-10:LitWorld-NTIVR-LitClub_Celebrations.ntivideoroll.1',
-			ntiid: 'tag:nextthought.com,2011-10:LitWorld-NTIVR-LitClub_Celebrations.ntivideoroll.1',
+			NTIID:
+				'tag:nextthought.com,2011-10:LitWorld-NTIVR-LitClub_Celebrations.ntivideoroll.1',
+			ntiid:
+				'tag:nextthought.com,2011-10:LitWorld-NTIVR-LitClub_Celebrations.ntivideoroll.1',
 			title: 'The Hello Song',
 			type: 'application/vnd.nextthought.videoroll',
 			videos: [
@@ -81,8 +85,10 @@ describe ('DOM Parsers: Parse Video Roll Elements', () => {
 					isVideo: true,
 					MimeType: 'application/vnd.nextthought.ntivideo',
 					NO_TRANSCRIPT: 'No Transcript',
-					NO_TRANSCRIPT_LANG: 'No Transcript for the requested language.',
-					NTIID: 'tag:nextthought.com,2011-10:LitWorld-NTIVideo-LitClub_Celebrations.ntivideo.video_Hello_Song_Annie_Foley',
+					NO_TRANSCRIPT_LANG:
+						'No Transcript for the requested language.',
+					NTIID:
+						'tag:nextthought.com,2011-10:LitWorld-NTIVideo-LitClub_Celebrations.ntivideo.video_Hello_Song_Annie_Foley',
 					EXISTING_TRANSCRIPT: 'A Transcript already exists',
 					itemprop: 'presentation-video',
 					title: 'Hello Song Annie Foley',
@@ -92,7 +98,7 @@ describe ('DOM Parsers: Parse Video Roll Elements', () => {
 							dataset: {
 								height: '360',
 								priority: '0',
-								width: '640'
+								width: '640',
 							},
 							type: 'application/vnd.nextthought.videosource',
 							title: 'undefined',
@@ -102,15 +108,18 @@ describe ('DOM Parsers: Parse Video Roll Elements', () => {
 							width: 640,
 							meta: {},
 							poster: '//img.youtube.com/vi/-no2o7TeHNA/0.jpg',
-							thumbnail: '//img.youtube.com/vi/-no2o7TeHNA/1.jpg'
-						}
-					]
-				}, {
+							thumbnail: '//img.youtube.com/vi/-no2o7TeHNA/1.jpg',
+						},
+					],
+				},
+				{
 					isVideo: true,
 					MimeType: 'application/vnd.nextthought.ntivideo',
 					NO_TRANSCRIPT: 'No Transcript',
-					NO_TRANSCRIPT_LANG: 'No Transcript for the requested language.',
-					NTIID: 'tag:nextthought.com,2011-10:LitWorld-NTIVideo-LitClub_Celebrations.ntivideo.video_Hello_Song_Cora',
+					NO_TRANSCRIPT_LANG:
+						'No Transcript for the requested language.',
+					NTIID:
+						'tag:nextthought.com,2011-10:LitWorld-NTIVideo-LitClub_Celebrations.ntivideo.video_Hello_Song_Cora',
 					EXISTING_TRANSCRIPT: 'A Transcript already exists',
 					itemprop: 'presentation-video',
 					title: 'Hello Song Cora',
@@ -120,7 +129,7 @@ describe ('DOM Parsers: Parse Video Roll Elements', () => {
 							dataset: {
 								height: '360',
 								priority: '0',
-								width: '640'
+								width: '640',
 							},
 							type: 'application/vnd.nextthought.videosource',
 							service: 'youtube',
@@ -129,12 +138,11 @@ describe ('DOM Parsers: Parse Video Roll Elements', () => {
 							width: 640,
 							meta: {},
 							poster: '//img.youtube.com/vi/mtahHh-Umrk/0.jpg',
-							thumbnail: '//img.youtube.com/vi/mtahHh-Umrk/1.jpg'
-						}
-					]
-				}
-			]
+							thumbnail: '//img.youtube.com/vi/mtahHh-Umrk/1.jpg',
+						},
+					],
+				},
+			],
 		});
 	});
-
 });

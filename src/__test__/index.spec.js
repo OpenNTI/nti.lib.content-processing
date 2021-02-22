@@ -5,7 +5,7 @@ import {
 	processContent,
 	parseWidgets,
 	filterContent,
-	getHTMLSnippet
+	getHTMLSnippet,
 } from '../index';
 
 const SAMPLE_CONTENT = `
@@ -75,17 +75,15 @@ const SAMPLE_CONTENT = `
 </html>
 `;
 
-
-describe ('Content Processing', () => {
+describe('Content Processing', () => {
 	global.$AppConfig = {
 		nodeService: {
 			//mock service
-		}
+		},
 	};
 
-	describe ('Helpers', () => {
-
-		test ('getContent strips xml pragmas & junk', () => {
+	describe('Helpers', () => {
+		test('getContent strips xml pragmas & junk', () => {
 			const html = '<html><body>hi</body></html>';
 			const doctyped = `<!DOCTYPE html>${html}`;
 			const junkA = `  <xml>aslkdjasdlkjasd ${html}`;
@@ -95,8 +93,7 @@ describe ('Content Processing', () => {
 			expect(getContent(junkB)).toBe(doctyped);
 		});
 
-
-		test ('parseHTML parses text into DOM', async () => {
+		test('parseHTML parses text into DOM', async () => {
 			const html = '<html><body><div id="content">hi</div></body></html>';
 			const dom = await parseHTML(html);
 
@@ -113,8 +110,7 @@ describe ('Content Processing', () => {
 			expect(div && div.textContent).toBe('hi');
 		});
 
-
-		test ('filterContent removes untrusted elements, and attributes', () => {
+		test('filterContent removes untrusted elements, and attributes', () => {
 			const html = `
 				<!DOCTYPE html>
 				<html>
@@ -149,8 +145,7 @@ describe ('Content Processing', () => {
 			expect(filterContent(html)).toBe(clean);
 		});
 
-
-		test ('getHTMLSnippet limits character count of text nodes only', () => {
+		test('getHTMLSnippet limits character count of text nodes only', () => {
 			const html = `
 				<fieldset class="mBottom">
 					<legend>Lorem ipsum: usage</legend>
@@ -162,15 +157,15 @@ describe ('Content Processing', () => {
 					<p id="mBottom5">Cicero famously orated against his political opponent Lucius Sergius Catilina. Occasionally the first Oration against Catiline is taken for type specimens: Quo usque tandem abutere, Catilina, patientia nostra? Quam diu etiam furor iste tuus nos eludet? (How long, O Catiline, will you abuse our patience? And for how long will that madness of yours mock us?)<br><br> In 1985 Aldus Corporation launched its first desktop publishing program Aldus PageMaker for Apple Macintosh computers, released in 1987 for PCs running Windows 1.0. Both contained the variant lorem ipsum most common today. Laura Perry, then art director with Aldus, modified prior versions of <strong>Lorem Ipsum</strong> text from typographical specimens; in the 1960s and 1970s it appeared often in lettering catalogs by Letraset. Anecdotal evidence has it that Letraset used <strong>Lorem ipsum</strong> already from 1970 onwards, eg. for grids (page layouts) for ad agencies. Many early desktop publishing programs, eg. Adobe PageMaker, used it to create templates.</p>
 				</fieldset>`;
 
-			const expected50 = '<fieldset class="mBottom"><legend>Lorem ipsum: usage</legend><img class="img" alt="lorem ipsum info" src="/img/0.gif" title="Marcus Tullius Cicero" style="" id="c7"><p id="mBottom0"><strong>Lorem ipsum</strong> is a pseudo-Latin...</p><img class="img" alt="lorem ipsum info" src="/img/0.gif" title="Marcus Tullius Cicero" style="" id="c7"><br class="clear"><p id="mBottom1"></p><img class="img" alt="lorem ipsum info" src="/img/0.gif" title="decorative vignette based on Lorem Ipsum" style="" id="c8"><p id="mBottom5"><br><br></p></fieldset>';
+			const expected50 =
+				'<fieldset class="mBottom"><legend>Lorem ipsum: usage</legend><img class="img" alt="lorem ipsum info" src="/img/0.gif" title="Marcus Tullius Cicero" style="" id="c7"><p id="mBottom0"><strong>Lorem ipsum</strong> is a pseudo-Latin...</p><img class="img" alt="lorem ipsum info" src="/img/0.gif" title="Marcus Tullius Cicero" style="" id="c7"><br class="clear"><p id="mBottom1"></p><img class="img" alt="lorem ipsum info" src="/img/0.gif" title="decorative vignette based on Lorem Ipsum" style="" id="c8"><p id="mBottom5"><br><br></p></fieldset>';
 
 			const limit50 = getHTMLSnippet(html, 50);
 
 			expect(limit50).toBe(expected50);
 		});
 
-
-		test ('parseWidgets', async () => {
+		test('parseWidgets', async () => {
 			const dom = await parseHTML(`
 				<div>
 					<object type="funtimes">
@@ -182,12 +177,20 @@ describe ('Content Processing', () => {
 			`);
 
 			const strategies = {
-				'object[type=funtimes]': e => ({element: e, type: 'funtimes'}),
-				'img': e => ({src: e.getAttribute('src')})
+				'object[type=funtimes]': e => ({
+					element: e,
+					type: 'funtimes',
+				}),
+				img: e => ({ src: e.getAttribute('src') }),
 			};
 
-			function getCommentNodes (node) {
-				const treeWalker = document.createTreeWalker(node, NodeFilter.SHOW_COMMENT, null, false);
+			function getCommentNodes(node) {
+				const treeWalker = document.createTreeWalker(
+					node,
+					NodeFilter.SHOW_COMMENT,
+					null,
+					false
+				);
 				const comments = [];
 				while (treeWalker.nextNode()) {
 					comments.push(treeWalker.currentNode);
@@ -197,12 +200,13 @@ describe ('Content Processing', () => {
 
 			const results = parseWidgets(strategies, dom, dom);
 
-			for(let selector of Object.keys(strategies)) {
+			for (let selector of Object.keys(strategies)) {
 				expect(dom.querySelector(selector)).toBe(null);
 			}
 
-			const placeholders = getCommentNodes(dom)
-				.filter(x => /nti:widget-marker/.test(x.textContent));
+			const placeholders = getCommentNodes(dom).filter(x =>
+				/nti:widget-marker/.test(x.textContent)
+			);
 
 			expect(placeholders.length).toBe(2);
 
@@ -216,13 +220,15 @@ describe ('Content Processing', () => {
 		});
 	});
 
-	describe ('Processes Content', () => {
-
-		test ('Get Processed Packet', async () => {
-			const originalPacket = {content: SAMPLE_CONTENT, arbitrary: 'value'};
+	describe('Processes Content', () => {
+		test('Get Processed Packet', async () => {
+			const originalPacket = {
+				content: SAMPLE_CONTENT,
+				arbitrary: 'value',
+			};
 			const dummyStrats = {
 				'span[itemprop=nti-data-markupdisabled]': () => ({}),
-				'ul.itemize': () => ({})
+				'ul.itemize': () => ({}),
 			};
 
 			const packet = await processContent(originalPacket, dummyStrats);
@@ -230,11 +236,22 @@ describe ('Content Processing', () => {
 			expect(packet).not.toBe(originalPacket);
 			expect(packet.arbitrary).toBe('value');
 			expect(packet.content).toBeTruthy();
-			expect(packet.body.every(x => typeof x === 'object' ? true : !x.includes('nti:widget-marker'))).toBeTruthy();
+			expect(
+				packet.body.every(x =>
+					typeof x === 'object'
+						? true
+						: !x.includes('nti:widget-marker')
+				)
+			).toBeTruthy();
 			expect(typeof packet.content).toBe('string');
 			expect(Array.isArray(packet.body)).toBe(true);
-			expect(packet.body.every(x => /object|string/.test(typeof x))).toBeTruthy();
-			expect(packet.styles).toEqual(['styles/styles.css', 'styles/content.css']);
+			expect(
+				packet.body.every(x => /object|string/.test(typeof x))
+			).toBeTruthy();
+			expect(packet.styles).toEqual([
+				'styles/styles.css',
+				'styles/content.css',
+			]);
 			expect(packet.widgets).toBeTruthy();
 			expect(Object.keys(packet.widgets).length).toBe(2);
 		});

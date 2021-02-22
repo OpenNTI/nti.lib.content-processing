@@ -31,5 +31,5 @@ export default {
 
 	'[itemprop*=nti-data-markup],[itemprop~=nti-slide-video]': parseFramedElement,
 
-	'realpagenumber': parseRealPageNumber
+	realpagenumber: parseRealPageNumber,
 };

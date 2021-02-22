@@ -1,14 +1,11 @@
 import Logger from '@nti/util-logger';
-import {parseNTIID} from '@nti/lib-ntiids';
-
+import { parseNTIID } from '@nti/lib-ntiids';
 
 import PageDescriptor from './PageDescriptor';
 import { getPageInfo } from './get-pageinfo';
 import { getPageContent } from './get-page-content';
 
-
 const logger = Logger.get('lib:content-processing:load');
-
 
 /**
  *	@param {string} ntiid Content Page - NTIID
@@ -16,23 +13,24 @@ const logger = Logger.get('lib:content-processing:load');
  *	@param {Object} [extra] - props, or extra config to pass along
  *	@returns {void}
  */
-export function loadPageDescriptor (ntiid, context, extra) {
+export function loadPageDescriptor(ntiid, context, extra) {
 	let isAssessmentID = parseNTIID(ntiid).specific.type === 'NAQ';
 
-	function loadTOC (id) {
+	function loadTOC(id) {
 		if (!id || id === 'placeholder') {
 			return null;
 		}
 
 		const loadPackage = Promise.resolve(
-			context.getPackage(id) || (context.refresh().then(() => context.getPackage(id)))
+			context.getPackage(id) ||
+				context.refresh().then(() => context.getPackage(id))
 		);
 
-		return loadPackage
-			.then(p =>
-				(p && p.getTableOfContents())
-				|| Promise.reject(Error('No Package for Page!'))
-			);
+		return loadPackage.then(
+			p =>
+				(p && p.getTableOfContents()) ||
+				Promise.reject(Error('No Package for Page!'))
+		);
 	}
 
 	return getPageInfo(ntiid, context, extra)
@@ -42,7 +40,11 @@ export function loadPageDescriptor (ntiid, context, extra) {
 				// get the pageInfo for an assessment id and the server
 				// returns the pageInfo that the assessment is on...
 				// so lets silence this error for that case.
-				logger.warn('PageInfo ID missmatch! %s != %s %o', ntiid, pageInfo.getID());
+				logger.warn(
+					'PageInfo ID missmatch! %s != %s %o',
+					ntiid,
+					pageInfo.getID()
+				);
 			}
 
 			return Promise.all([
@@ -54,11 +56,13 @@ export function loadPageDescriptor (ntiid, context, extra) {
 
 				//Get the data store. (Important note: the store itself will load in parallel
 				// (and not block page render))
-				pageInfo.getUserData()
-
+				pageInfo.getUserData(),
 			]).then(pack => {
 				let [tableOfContents, packet, userDataStore] = pack;
-				return Object.assign(packet, { tableOfContents, userDataStore });
+				return Object.assign(packet, {
+					tableOfContents,
+					userDataStore,
+				});
 			});
 		})
 

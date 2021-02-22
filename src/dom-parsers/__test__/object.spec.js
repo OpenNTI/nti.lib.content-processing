@@ -1,11 +1,10 @@
 /* eslint-env jest */
 import parseDomObject from '../object';
 
-import {makeDOM} from './tools';
+import { makeDOM } from './tools';
 
-describe ('DOM Parsers: DOM to Object Parser', () => {
-
-	test ('Should interpret a DOM <object> into a JSON object', () => {
+describe('DOM Parsers: DOM to Object Parser', () => {
+	test('Should interpret a DOM <object> into a JSON object', () => {
 		const id = 'fancy-thing';
 		const ntiid = 'tag:nextthought.com:test';
 		const type = 'application/vnd.next....';
@@ -26,17 +25,16 @@ describe ('DOM Parsers: DOM to Object Parser', () => {
 			something: 'baz',
 			dataset: {
 				ntiid,
-				source: 'abc'
-			}
+				source: 'abc',
+			},
 		});
-
 
 		expect(json.dom).toBeTruthy();
 		expect(json.dom.nodeType).toBe(Node.ELEMENT_NODE);
 		expect(json.dom).not.toBe(obj);
 	});
 
-	test ('Pulls NTIID out of params', () => {
+	test('Pulls NTIID out of params', () => {
 		const id = 'fancy-thing';
 		const ntiid = 'tag:nextthought.com:test';
 		const type = 'application/vnd.next....';
@@ -58,26 +56,26 @@ describe ('DOM Parsers: DOM to Object Parser', () => {
 			something: 'baz',
 			ntiid,
 			dataset: {
-				source: 'abc'
-			}
+				source: 'abc',
+			},
 		});
-
 
 		expect(json.dom).toBeTruthy();
 		expect(json.dom.nodeType).toBe(Node.ELEMENT_NODE);
 		expect(json.dom).not.toBe(obj);
 	});
 
-
-	test ('Should work on any node', () => {
+	test('Should work on any node', () => {
 		const src = 'generic.png';
-		const obj = makeDOM(`<img src="${src}" class="avatar" style="opacity: 0">`);
+		const obj = makeDOM(
+			`<img src="${src}" class="avatar" style="opacity: 0">`
+		);
 
 		const json = parseDomObject(obj);
 		expect(json).toEqual({
 			src,
 			class: 'avatar',
-			style: 'opacity: 0'
+			style: 'opacity: 0',
 		});
 
 		expect(json.dom).toBeTruthy();

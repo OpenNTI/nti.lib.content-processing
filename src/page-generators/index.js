@@ -12,5 +12,5 @@ export default {
 	'application/vnd.nextthought.naquestionset': Assessment,
 	'application/vnd.nextthought.naquestionbank': Assessment,
 	'application/vnd.nextthought.relatedworkref': RelatedWork,
-	'application/vnd.nextthought.ltiexternaltoolasset': ExternalToolAsset
+	'application/vnd.nextthought.ltiexternaltoolasset': ExternalToolAsset,
 };

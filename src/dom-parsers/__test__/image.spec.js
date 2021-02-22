@@ -1,11 +1,10 @@
 /* eslint-env jest */
-import parseImage, {getImagesFromDom} from '../image';
+import parseImage, { getImagesFromDom } from '../image';
 
-import {makeDOM} from './tools';
+import { makeDOM } from './tools';
 
-describe ('DOM Parsers: Parse Image Elements', () => {
-
-	test ('parseImage should return a valid object', () => {
+describe('DOM Parsers: Parse Image Elements', () => {
+	test('parseImage should return a valid object', () => {
 		const img = makeDOM(`
 			<img crossorigin="anonymous"
 				data-nti-image-full="resources/full.jpg"
@@ -30,13 +29,17 @@ describe ('DOM Parsers: Parse Image Elements', () => {
 			zoomable: false,
 			source: {
 				prefix: '',
-				sizes: ['resources/full.jpg', 'resources/half.jpg', 'resources/quarter.jpg'],
-				size: -1
-			}
+				sizes: [
+					'resources/full.jpg',
+					'resources/half.jpg',
+					'resources/quarter.jpg',
+				],
+				size: -1,
+			},
 		});
 	});
 
-	test ('parseImage should understand any image', () => {
+	test('parseImage should understand any image', () => {
 		const img = makeDOM(`
 			<img src="resources/full.jpg"/>
 		`);
@@ -51,15 +54,13 @@ describe ('DOM Parsers: Parse Image Elements', () => {
 			source: {
 				prefix: '',
 				sizes: ['resources/full.jpg'],
-				size: -1
-			}
+				size: -1,
+			},
 		});
 	});
 
-
-	describe ('getImagesFromDom', () => {
-
-		test ('should find images', () => {
+	describe('getImagesFromDom', () => {
+		test('should find images', () => {
 			const imgs = makeDOM(`
 				<span>
 					<img crossorigin="anonymous"
@@ -90,5 +91,4 @@ describe ('DOM Parsers: Parse Image Elements', () => {
 			}
 		});
 	});
-
 });
