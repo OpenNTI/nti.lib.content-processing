@@ -1,5 +1,6 @@
-import { replaceNode, parent } from '@nti/lib-dom';
 import { v4 as uuid } from 'uuid';
+
+import { replaceNode, parent } from '@nti/lib-dom';
 
 /**
  * @param {Object} strategies		An object where the keys are the CSS selectors for widgets, and
