@@ -26,11 +26,11 @@ export function loadPageDescriptor(ntiid, context, extra) {
 				context.refresh().then(() => context.getPackage(id))
 		);
 
-		return loadPackage.then(
-			p =>
-				(p && p.getTableOfContents()) ||
-				Promise.reject(Error('No Package for Page!'))
-		);
+		return loadPackage.then(async p => {
+			if (p && p.getTableOfContents()) {
+				throw new Error('No Package for Page!');
+			}
+		});
 	}
 
 	return getPageInfo(ntiid, context, extra)

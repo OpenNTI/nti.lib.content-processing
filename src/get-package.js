@@ -11,5 +11,5 @@ export async function getPackage(id) {
 		//
 	}
 
-	return Promise.reject(PACKAGE_NOT_FOUND);
+	throw PACKAGE_NOT_FOUND;
 }
