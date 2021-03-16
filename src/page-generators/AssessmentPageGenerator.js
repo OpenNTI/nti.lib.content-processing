@@ -13,15 +13,16 @@ export function buildPageInfoForContents(
 	const ntiid = assessment.getID();
 
 	const parent = assessment.parent('ContentPackageBundle');
-	const Bundle = parent && parent.ContentPackageBundle;
-	const Package = Bundle && Bundle.ContentPackages[0];
+	const bundle = parent?.ContentPackageBundle;
+	const firstContentPackage = bundle?.ContentPackages?.[0];
 	/*
 	 * NTI-4705: Placeholder is there for courses that are newly created with no content packages.
 	 * This allows for assignments to be opened in an empty course.
 	 */
 	const ContentPackageNTIID =
-		Package && (!Package.isRenderable || Package.isRendered)
-			? Package.NTIID
+		firstContentPackage &&
+		(!firstContentPackage.isRenderable || firstContentPackage.isRendered)
+			? firstContentPackage.NTIID
 			: 'placeholder';
 
 	const content = `
