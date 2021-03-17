@@ -7,6 +7,23 @@ import { getPageContent } from './get-page-content';
 
 const logger = Logger.get('lib:content-processing:load');
 
+async function loadPackage (id, context) {
+	try {
+		const existing = await context.getPackage(id);
+
+		if (existing) { return existing; }
+
+		await context.refreshContentPackages ? context.refreshContentPackages() : context.refresh();
+
+		const updated = await context.getPackage(id);
+
+		return updated;
+	} catch (e) {
+		return null;
+	}
+}
+
+
 /**
  *	@param {string} ntiid Content Page - NTIID
  *	@param {Package|Bundle|Instance} context - An instance of a Content/Course model
@@ -16,21 +33,16 @@ const logger = Logger.get('lib:content-processing:load');
 export function loadPageDescriptor(ntiid, context, extra) {
 	let isAssessmentID = parseNTIID(ntiid).specific.type === 'NAQ';
 
-	function loadTOC(id) {
+	async function loadTOC(id) {
 		if (!id || id === 'placeholder') {
 			return null;
 		}
 
-		const loadPackage = Promise.resolve(
-			context.getPackage(id) ||
-				context.refresh().then(() => context.getPackage(id))
-		);
+		const p = await loadPackage(id, context);
 
-		return loadPackage.then(
-			async p =>
-				p?.getTableOfContents?.() ||
-				Promise.reject(new Error('No Package for Page!'))
-		);
+		if (!p || !p.getTableOfContents) { throw new Error('No Package for Page!'); }
+
+		return p.getTableOfContents();
 	}
 
 	return getPageInfo(ntiid, context, extra)
