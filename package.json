@@ -4,12 +4,7 @@
   "author": "nextthought",
   "license": "UNLICENSED",
   "description": "Process NTI content (controlled HTML)",
-  "main": ".index.js",
-  "module": "src/index.js",
-  "files": [
-    ".index.js",
-    "src"
-  ],
+  "main": "src/index.js",
   "testEnvironment": "jsdom",
   "scripts": {
     "test": "lib-scripts test",
@@ -33,8 +28,7 @@
     "@nti/util-logger": "NextThought/nti.util.logger",
     "@nti/web-client": "NextThought/nti.web.client",
     "lru-cache": "^6.0.0",
-    "uuid": "^8.3.0",
-    "esm": "^3.2.25"
+    "uuid": "^8.3.0"
   },
   "devDependencies": {
     "@nti/lib-scripts": "^2.0.0"
