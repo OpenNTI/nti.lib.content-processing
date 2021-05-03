@@ -1,4 +1,6 @@
 /* eslint-env jest */
+import { setupTestClient } from '@nti/web-client/test-utils';
+
 import {
 	getContent,
 	parseHTML,
@@ -23,7 +25,7 @@ const SAMPLE_CONTENT = `
 	</head>
 	<body id="NTIContent">
 		<div class="page-contents">
-			<a name="291b7311d8bfaf12538018c021844717"></a>
+			<a name="291b7311d8bfaf12538018c02184import { setupTestClient } from '@nti/web-client/test-utils';4717"></a>
 			<div class="minipage" style="width:450.0pt">
 				<div class="align-center">
 					<span itemprop="nti-data-markupdisabled">
@@ -76,11 +78,9 @@ const SAMPLE_CONTENT = `
 `;
 
 describe('Content Processing', () => {
-	global.$AppConfig = {
-		nodeService: {
-			//mock service
-		},
-	};
+	setupTestClient({
+		//mock service
+	});
 
 	describe('Helpers', () => {
 		test('getContent strips xml pragmas & junk', () => {
