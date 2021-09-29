@@ -47,13 +47,8 @@ describe('DOM Parsers: Parse Video Elements', () => {
 		const raw = JSON.parse(JSON.stringify(json));
 
 		expect(raw).toEqual({
-			isVideo: true,
-			NO_TRANSCRIPT: 'No Transcript',
-			NO_TRANSCRIPT_LANG: 'No Transcript for the requested language.',
-			EXISTING_TRANSCRIPT: 'A Transcript already exists',
 			MimeType: 'application/vnd.nextthought.ntivideo',
-			NTIID:
-				'tag:nextthought.com,2011-10:LitWorld-NTIVideo-LitClub_Celebrations.ntivideo.video_Hello_Song_Annie_Foley',
+			NTIID: 'tag:nextthought.com,2011-10:LitWorld-NTIVideo-LitClub_Celebrations.ntivideo.video_Hello_Song_Annie_Foley',
 			itemprop: 'presentation-video',
 			title: 'Hello Song Annie Foley',
 			sources: [
@@ -70,7 +65,6 @@ describe('DOM Parsers: Parse Video Elements', () => {
 					source: '-no2o7TeHNA',
 					height: 360,
 					width: 640,
-					meta: {},
 					poster: '//img.youtube.com/vi/-no2o7TeHNA/0.jpg',
 					thumbnail: '//img.youtube.com/vi/-no2o7TeHNA/1.jpg',
 				},

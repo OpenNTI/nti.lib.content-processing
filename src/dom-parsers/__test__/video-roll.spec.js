@@ -66,30 +66,20 @@ describe('DOM Parsers: Parse Video Roll Elements', () => {
 		const raw = JSON.parse(JSON.stringify(json));
 
 		expect(raw).toEqual({
-			data:
-				'tag:nextthought.com,2011-10:LitWorld-NTIVR-LitClub_Celebrations.ntivideoroll.1',
+			data: 'tag:nextthought.com,2011-10:LitWorld-NTIVR-LitClub_Celebrations.ntivideoroll.1',
 			dataset: {
-				ntiid:
-					'tag:nextthought.com,2011-10:LitWorld-NTIVR-LitClub_Celebrations.ntivideoroll.1',
+				ntiid: 'tag:nextthought.com,2011-10:LitWorld-NTIVR-LitClub_Celebrations.ntivideoroll.1',
 			},
 			description: 'Watch examples of the Hello Song',
 			MimeType: 'application/vnd.nextthought.videoroll',
-			NTIID:
-				'tag:nextthought.com,2011-10:LitWorld-NTIVR-LitClub_Celebrations.ntivideoroll.1',
-			ntiid:
-				'tag:nextthought.com,2011-10:LitWorld-NTIVR-LitClub_Celebrations.ntivideoroll.1',
+			NTIID: 'tag:nextthought.com,2011-10:LitWorld-NTIVR-LitClub_Celebrations.ntivideoroll.1',
+			ntiid: 'tag:nextthought.com,2011-10:LitWorld-NTIVR-LitClub_Celebrations.ntivideoroll.1',
 			title: 'The Hello Song',
 			type: 'application/vnd.nextthought.videoroll',
 			videos: [
 				{
-					isVideo: true,
 					MimeType: 'application/vnd.nextthought.ntivideo',
-					NO_TRANSCRIPT: 'No Transcript',
-					NO_TRANSCRIPT_LANG:
-						'No Transcript for the requested language.',
-					NTIID:
-						'tag:nextthought.com,2011-10:LitWorld-NTIVideo-LitClub_Celebrations.ntivideo.video_Hello_Song_Annie_Foley',
-					EXISTING_TRANSCRIPT: 'A Transcript already exists',
+					NTIID: 'tag:nextthought.com,2011-10:LitWorld-NTIVideo-LitClub_Celebrations.ntivideo.video_Hello_Song_Annie_Foley',
 					itemprop: 'presentation-video',
 					title: 'Hello Song Annie Foley',
 					sources: [
@@ -106,21 +96,14 @@ describe('DOM Parsers: Parse Video Roll Elements', () => {
 							source: '-no2o7TeHNA',
 							height: 360,
 							width: 640,
-							meta: {},
 							poster: '//img.youtube.com/vi/-no2o7TeHNA/0.jpg',
 							thumbnail: '//img.youtube.com/vi/-no2o7TeHNA/1.jpg',
 						},
 					],
 				},
 				{
-					isVideo: true,
 					MimeType: 'application/vnd.nextthought.ntivideo',
-					NO_TRANSCRIPT: 'No Transcript',
-					NO_TRANSCRIPT_LANG:
-						'No Transcript for the requested language.',
-					NTIID:
-						'tag:nextthought.com,2011-10:LitWorld-NTIVideo-LitClub_Celebrations.ntivideo.video_Hello_Song_Cora',
-					EXISTING_TRANSCRIPT: 'A Transcript already exists',
+					NTIID: 'tag:nextthought.com,2011-10:LitWorld-NTIVideo-LitClub_Celebrations.ntivideo.video_Hello_Song_Cora',
 					itemprop: 'presentation-video',
 					title: 'Hello Song Cora',
 					sources: [
@@ -136,7 +119,6 @@ describe('DOM Parsers: Parse Video Roll Elements', () => {
 							source: 'mtahHh-Umrk',
 							height: 360,
 							width: 640,
-							meta: {},
 							poster: '//img.youtube.com/vi/mtahHh-Umrk/0.jpg',
 							thumbnail: '//img.youtube.com/vi/mtahHh-Umrk/1.jpg',
 						},
