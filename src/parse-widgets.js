@@ -6,9 +6,7 @@ import { replaceNode, parent } from '@nti/lib-dom';
  * @param {Object} strategies		An object where the keys are the CSS selectors for widgets, and
  *                             		the values are functions to transform that selected element into
  *                             		an Object used to render the Widget.
- *
  * @param {Document} doc			The content to search.
- *
  * @param {Node} elementFactory		A Dom object that has an implementation for 'createComment'.
  * @param {ServiceDocument} service	The Service document for your session.
  * @returns {Object[]} An array of objects representing widgets.

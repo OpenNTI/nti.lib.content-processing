@@ -2,7 +2,6 @@
  * Filters out all TAGs except for the ones absolutely necessary to convey the content.
  *
  * @param {string} html The content to filter
- *
  * @returns {string} Filtered HTML
  */
 export function filterContent(html) {
