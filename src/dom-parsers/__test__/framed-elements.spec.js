@@ -100,7 +100,7 @@ describe('DOM Parsers: Parse Framed Elements', () => {
 			</span>
 		`);
 
-		const json = parseFramedElement(frame);
+		const json = parseFramedElement(frame, null);
 
 		expect(json.item.zoomable).toBe(true);
 		expect(json.item.source.size).toBe(1);
