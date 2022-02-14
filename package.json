@@ -27,7 +27,7 @@
     "@nti/lib-ntiids": "NextThought/nti.lib.ntiids",
     "@nti/util-logger": "NextThought/nti.util.logger",
     "@nti/web-client": "NextThought/nti.web.client",
-    "lru-cache": "^6.0.0",
+    "lru-cache": "^7.3.1",
     "uuid": "^8.3.0"
   },
   "devDependencies": {
